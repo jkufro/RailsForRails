@@ -2,8 +2,8 @@
 
 one:
   visit_timestamp: 2018-05-23 22:23:27
-  user_id: 1
+  park_pass_id: 1
 
 two:
   visit_timestamp: 2018-05-23 22:23:27
-  user_id: 1
+  park_pass_id: 1

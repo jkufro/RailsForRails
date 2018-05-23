@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180523222327) do
+ActiveRecord::Schema.define(version: 20180523224042) do
 
   create_table "park_passes", force: :cascade do |t|
     t.integer "user_id"
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 20180523222327) do
 
   create_table "visits", force: :cascade do |t|
     t.datetime "visit_timestamp"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "park_pass_id"
   end
 
 end
