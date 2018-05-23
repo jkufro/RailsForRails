@@ -33,12 +33,27 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use a gem for handling date validation
+gem 'validates_timeliness', '4.0.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # added by jkufro
+  gem 'simplecov', '0.15.1'
+  gem 'shoulda', '3.5.0'
+  gem 'shoulda-matchers', '2.8.0'
+  gem 'minitest-rails', '3.0.0'
+  gem 'minitest-reporters', '1.1.19'
+  gem 'rails-controller-testing', '1.0.2'
+  gem 'mocha', require: false
+  gem 'cucumber-rails', '1.5.0', require: false
+  gem 'database_cleaner', '1.6.2'
+  gem 'launchy', '2.4.3'
+  gem 'factory_bot_rails', '4.8.2'
 end
 
 group :development do
