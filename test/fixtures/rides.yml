@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  carts_on_track: 1
+  ride_duration: 1
+  ride_description: MyText
+  cart_occupancy: 1
+  max_allowed_queue_code: MyString
+  allow_queue: false
+  active: false
+  min_height: 1
+
+two:
+  carts_on_track: 1
+  ride_duration: 1
+  ride_description: MyText
+  cart_occupancy: 1
+  max_allowed_queue_code: MyString
+  allow_queue: false
+  active: false
+  min_height: 1
