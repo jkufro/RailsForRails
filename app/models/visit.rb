@@ -7,7 +7,6 @@ class Visit < ApplicationRecord
     
     before_create :pass_cannot_be_expired
     
-    
     private
     
     def pass_cannot_be_expired

@@ -8,6 +8,6 @@ class ParkPass < ApplicationRecord
     validates_timeliness_of :card_expiration, :on => :create, :on_or_after => :today, :message => "must be today or in the future"
     
     def expired?
-      
+      self.card_expiration >= Date.today
     end
 end
