@@ -36,5 +36,14 @@ class RideTest < ActiveSupport::TestCase
   should_not allow_value(-1).for(:ride_duration)
   should_not allow_value(20.0000001).for(:ride_duration)
   
-  
+  should validate_numericality_of(:cart_occupancy)
+  should allow_value(1).for(:cart_occupancy)
+  should allow_value(100).for(:cart_occupancy)
+  should allow_value(60).for(:cart_occupancy)
+  should allow_value(22.0).for(:cart_occupancy)
+  should_not allow_value(0).for(:cart_occupancy)
+  should_not allow_value(0.1).for(:cart_occupancy)
+  should_not allow_value(-0.1).for(:cart_occupancy)
+  should_not allow_value(-1).for(:cart_occupancy)
+  should_not allow_value(20.0000001).for(:cart_occupancy)
 end
