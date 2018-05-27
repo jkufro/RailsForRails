@@ -14,4 +14,5 @@ class ParkPassTest < ActiveSupport::TestCase
   should_not allow_value("P96919632255052A").for(:card_number)
   should_not allow_value("P9691963225505274").for(:card_number)
   should_not allow_value("P96919632255527").for(:card_number)
+  should_not allow_value("p96919632255527").for(:card_number)
 end
