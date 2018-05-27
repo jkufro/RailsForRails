@@ -3,6 +3,7 @@ require 'test_helper'
 class VisitTest < ActiveSupport::TestCase
   should have_many(:quueues)
   should belong_to(:park_pass)
+  should validate_presence_of(:visit_date)
   
   should allow_value(Date.today).for(:visit_date)
   should allow_value(10.minutes.from_now).for(:visit_date)
