@@ -14,36 +14,8 @@ class RideTest < ActiveSupport::TestCase
   should_not allow_value("FFF4W").for(:max_allowed_queue_code)
   should_not allow_value("11111").for(:max_allowed_queue_code)
   
-  should validate_numericality_of(:carts_on_track)
-  should allow_value(0).for(:carts_on_track)
-  should allow_value(1).for(:carts_on_track)
-  should allow_value(100).for(:carts_on_track)
-  should allow_value(60).for(:carts_on_track)
-  should allow_value(22.0).for(:carts_on_track)
-  should_not allow_value(0.1).for(:carts_on_track)
-  should_not allow_value(-0.1).for(:carts_on_track)
-  should_not allow_value(-1).for(:carts_on_track)
-  should_not allow_value(20.0000001).for(:carts_on_track)
-  
-  should validate_numericality_of(:ride_duration)
-  should allow_value(1).for(:ride_duration)
-  should allow_value(100).for(:ride_duration)
-  should allow_value(60).for(:ride_duration)
-  should allow_value(22.0).for(:ride_duration)
-  should_not allow_value(0).for(:ride_duration)
-  should_not allow_value(0.1).for(:ride_duration)
-  should_not allow_value(-0.1).for(:ride_duration)
-  should_not allow_value(-1).for(:ride_duration)
-  should_not allow_value(20.0000001).for(:ride_duration)
-  
-  should validate_numericality_of(:cart_occupancy)
-  should allow_value(1).for(:cart_occupancy)
-  should allow_value(100).for(:cart_occupancy)
-  should allow_value(60).for(:cart_occupancy)
-  should allow_value(22.0).for(:cart_occupancy)
-  should_not allow_value(0).for(:cart_occupancy)
-  should_not allow_value(0.1).for(:cart_occupancy)
-  should_not allow_value(-0.1).for(:cart_occupancy)
-  should_not allow_value(-1).for(:cart_occupancy)
-  should_not allow_value(20.0000001).for(:cart_occupancy)
+  should validate_numericality_of(:carts_on_track).is_greater_than_or_equal_to(0).only_integer
+  should validate_numericality_of(:ride_duration).is_greater_than(0).only_integer
+  should validate_numericality_of(:cart_occupancy).is_greater_than(0).only_integer
+  should validate_numericality_of(:min_height).is_greater_than(0).only_integer
 end
