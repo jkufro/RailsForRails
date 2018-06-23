@@ -3,7 +3,7 @@ simplecov:
   stage: test
   image: docker.io/rails:5
   script:
-    - bunlde install
+    - bundle install
     - rails test
   artifacts:
     paths:
