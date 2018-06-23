@@ -13,18 +13,6 @@ simplecov:
       - coverage/
   variables:
     GIT_SSL_NO_VERIFY: "true"
-  # only:
-  #   - master
+  only:
+    - master
 
-pages:
-  stage: deploy
-  dependencies:
-    - simplecov
-  script:
-    - mv coverage/ public/
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
-  # only:
-  #   - master
