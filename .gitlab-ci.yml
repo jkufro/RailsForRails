@@ -1,13 +1,13 @@
 
 simplecov:
   stage: test
-  image: docker.io/rails:5
+  image: docker.io/ruby:2.5.1
   script:
-    - apt-get update -qy
-    - apt-get install -y nodejs
-    - bundle install --path /cache
-    - bundle exec rake db:create RAILS_ENV=test
-    - bundle exec rake test
+    - gem install rails -v 5.1.6
+    - gem install bundler
+    - bundle install --gemfile=Gemfile
+    - rails db:migrate
+    - rails test
   artifacts:
     paths:
       - coverage/
