@@ -1,3 +1,4 @@
+
 simplecov:
   stage: test
   image: docker.io/ruby:2.5.1
@@ -13,7 +14,7 @@ simplecov:
 pages:
   stage: deploy
   dependencies:
-    - rspec
+    - simplecov
   script:
     - mv coverage/ public/
   artifacts:
