@@ -1,8 +1,9 @@
 
 simplecov:
   stage: test
-  image: docker.io/rails:5
+  image: docker.io/ruby:2.5.1
   script:
+    - gem install rails -v 5.1.6
     - bundle install
     - rails test
   artifacts:
