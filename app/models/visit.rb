@@ -9,6 +9,7 @@ class Visit < ApplicationRecord
   # ------ #
   # scopes #
   # ------ #
+  scope :today, -> { where(visit_date: Date.today) }
 
 
   # ----------- #
@@ -24,11 +25,26 @@ class Visit < ApplicationRecord
   before_create :pass_cannot_be_expired
 
 
-
   # ---------------- #
   # public functions #
   # ---------------- #
+  def ridden_rides
+    self.quueues.are_checked_in.map{ |q| q.ride }
+  end
 
+  def ridden_rides_summary
+    summary = Hash.new(0)
+    rides = self.ridden_rides
+    rides.each{ |r| summary[r.ride_name] += 1}
+    return summary
+  end
+
+  def current_queue
+    latest = self.quueues.alphabetical.last
+    unless latest.checked_in
+      return latest
+    end
+  end
 
 
   # ----------------- #

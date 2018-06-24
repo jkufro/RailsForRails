@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.string "last_name"
     t.string "card_number"
     t.date "card_expiration"
-    t.integer "height"
+    t.integer "height", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.string "max_allowed_queue_code", default: 'AAAAA'
     t.boolean "allow_queue", default: true
     t.boolean "active", default: true
-    t.integer "min_height", default: 48
+    t.integer "min_height", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ride_name"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.string "password_digest"
     t.string "email"
     t.string "phone"
-    t.string "role"
+    t.string "role", default: 'visitor'
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

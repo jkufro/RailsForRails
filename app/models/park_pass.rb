@@ -34,6 +34,23 @@ class ParkPass < ApplicationRecord
     self.card_expiration >= Date.today
   end
 
+  def ridden_rides
+    rides = []
+    self.visits.each{ |v| rides << v.ridden_rides }
+    return rides
+  end
+
+  def ridden_rides_summary
+    summary = Hash.new(0)
+    rides = self.ridden_rides
+    rides.each{ |r| summary[r.ride_name] += 1}
+    return summary
+  end
+
+  def at_park?
+    !self.visits.today.nil?
+  end
+
 
   # ----------------- #
   # private functions #
