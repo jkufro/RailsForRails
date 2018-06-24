@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180527232159) do
+ActiveRecord::Schema.define(version: 20180624165003) do
 
   create_table "park_passes", force: :cascade do |t|
     t.integer "user_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180527232159) do
   end
 
   create_table "pass_types", force: :cascade do |t|
-    t.string "name"
+    t.string "pass_name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180527232159) do
     t.integer "ride_id"
     t.integer "visit_id"
     t.string "queue_code"
-    t.boolean "checked_in"
+    t.boolean "checked_in", default: false
     t.string "security_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -46,12 +46,13 @@ ActiveRecord::Schema.define(version: 20180527232159) do
     t.integer "ride_duration"
     t.text "ride_description"
     t.integer "cart_occupancy"
-    t.string "max_allowed_queue_code"
-    t.boolean "allow_queue"
-    t.boolean "active"
-    t.integer "min_height"
+    t.string "max_allowed_queue_code", default: 'AAAAA'
+    t.boolean "allow_queue", default: true
+    t.boolean "active", default: true
+    t.integer "min_height", default: 48
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ride_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(version: 20180527232159) do
     t.string "email"
     t.string "phone"
     t.string "role"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

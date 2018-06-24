@@ -13,6 +13,7 @@ class PassType < ApplicationRecord
   # ----------- #
   # validations #
   # ----------- #
+  validates_presence_of :pass_name
 
 
   # --------- #
