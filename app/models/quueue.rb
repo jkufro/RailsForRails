@@ -20,7 +20,7 @@ class Quueue < ApplicationRecord
   # validations #
   # ----------- #
   validates_presence_of :ride_id, :visit_id, :queue_code, :security_code
-  validates_format_of :queue_code, with: /\A[A-Z]{5}\z/, message: "must be five upper case letters"
+  validates_format_of :queue_code, with: /\A[A-Z]{4}\z/, message: "must be four upper case letters"
   validates_format_of :security_code, with: /\A[A-Z]{20}\z/, message: "must be twenty upper case letters"
   validate :cant_check_in_without_is_ready
 
