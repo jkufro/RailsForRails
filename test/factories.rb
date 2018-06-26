@@ -11,7 +11,7 @@ FactoryBot.define do
   end
 
   factory :pass_type do
-    name "Fun Pass"
+    pass_name "Fun Pass"
     description "Pay for a day, come back all year."
   end
 
@@ -24,12 +24,13 @@ FactoryBot.define do
   end
 
   factory :ride do
+    ride_name 'Montu'
     carts_on_track 2
-    cart_occupancy 16
-    ride_duration 60
+    cart_occupancy 28
+    ride_duration 180
     ride_description "It goes fast!"
     max_allowed_queue_code "AAAAA"
-    min_height 48
+    min_height 54
     allow_queue true
     active true
   end
