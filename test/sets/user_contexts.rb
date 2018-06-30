@@ -1,6 +1,7 @@
 module Contexts
   module UserContexts
     def create_users
+      @admin = FactoryBot.create(:user)
       @justin = FactoryBot.create(:user, username: 'jkufro', role: 'visitor')
       @tyler = FactoryBot.create(:user, username: 'tkufro', role: 'visitor')
       @gail = FactoryBot.create(:user, username: 'gkufro', role: 'visitor')

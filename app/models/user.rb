@@ -36,6 +36,11 @@ class User < ApplicationRecord
   # ---------------- #
   # public functions #
   # ---------------- #
+  def role?(authorized_role)
+    return false if role.nil?
+    role.downcase.to_sym == authorized_role
+  end
+
   def self.authenticate_email(email,password)
     # allow someone to authenticate using an email and password
     find_by_email(email).try(:authenticate, password)
