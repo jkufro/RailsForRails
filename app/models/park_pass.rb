@@ -32,7 +32,7 @@ class ParkPass < ApplicationRecord
   # public functions #
   # ---------------- #
   def expired?
-    self.card_expiration >= Date.today
+    self.card_expiration < Date.today
   end
 
   def ridden_rides

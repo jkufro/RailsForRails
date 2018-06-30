@@ -17,12 +17,12 @@ class Visit < ApplicationRecord
   # ----------- #
   validates_presence_of :visit_date, :park_pass_id
   validates_timeliness_of :visit_date, :on => :create, :is_at => Date.today
+  validate :pass_cannot_be_expired, :on => :create
 
 
   # --------- #
   # callbacks #
   # --------- #
-  before_create :pass_cannot_be_expired, :visit_must_be_today
 
 
   # ---------------- #
@@ -52,14 +52,10 @@ class Visit < ApplicationRecord
   # ----------------- #
   private
   def pass_cannot_be_expired
-    if self.park_pass.expired?
-      errors.add(:park_pass, "is expired")
-    end
-  end
-
-  def visit_must_be_today
-    unless self.visit_date == Date.today
-      errors.add(:visit_date, "must be today")
+    unless self.park_pass.nil?
+      if self.park_pass.expired?
+        errors.add(:park_pass, "is expired")
+      end
     end
   end
 end

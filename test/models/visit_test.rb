@@ -36,5 +36,22 @@ class VisitTest < ActiveSupport::TestCase
       @justin_visit.visit_date = Date.yesterday
       assert @justin_visit.valid?
     end
+
+    should "show that expired passes cannot visit" do
+      @joe_fun_pass.card_expiration = Date.yesterday
+      @joe_fun_pass.save
+      bad_visit = FactoryBot.build(:visit, park_pass: @joe_fun_pass)
+      deny bad_visit.valid?
+    end
+
+    should "show that the ridden_rides function works" do
+      assert_equal(@justin_visit.ridden_rides, [@montu])
+      assert_equal(@gail_visit.ridden_rides, [])
+    end
+
+    should "show that the ridden_rides_summary function works" do
+      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 1})
+      assert_equal(@gail_visit.ridden_rides_summary, {})
+    end
   end
 end
