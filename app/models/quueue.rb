@@ -13,7 +13,7 @@ class Quueue < ApplicationRecord
   scope :are_not_checked_in, -> { where(checked_in: false) }
   scope :today, -> { where("created_at >= ?", Date.today.beginning_of_day) }
   scope :on_date, ->(date) { where("created_at >= ? AND created_at <= ?", date.beginning_of_day, date.end_of_day) }
-  scope :all_past, -> { where(["created_at >= ? AND created_at <= ?", Date.today.beginning_of_day, date.end_of_day]) }
+  scope :all_past, -> { where("created_at < ?", Date.today.beginning_of_day) }
 
 
   # ----------- #
@@ -24,6 +24,7 @@ class Quueue < ApplicationRecord
   validates_format_of :security_code, with: /\A[A-Z]{20}\z/, message: "must be twenty upper case letters"
   validate :cant_check_in_without_is_ready
   validate :ride_must_allow_queue
+  validate :cannot_be_in_two_lines_at_once, :on => :create
 
 
   # --------- #
@@ -44,6 +45,15 @@ class Quueue < ApplicationRecord
   # private functions #
   # ----------------- #
   private
+  def cannot_be_in_two_lines_at_once
+    unless self.visit.nil?
+      current_line = self.visit.quueues.today.are_not_checked_in.first
+      unless current_line.nil?
+        errors.add(:base, 'rider cannot be in two lines at once')
+      end
+    end
+  end
+
   def cant_check_in_without_is_ready
     if self.checked_in && !self.is_ready?
       errors.add(:base, "rider is not ready to check in yet")
@@ -57,22 +67,28 @@ class Quueue < ApplicationRecord
   end
 
   def create_queue_code
-    # check if this object needs a queue_code
-    if self.queue_code.nil? || self.queue_code == ''
-      last_queue_for_ride = self.ride.quueues.alphabetical.last
+    # ensure self.ride and self.visit are defined
+    unless self.ride.nil? || self.visit.nil?
+      # check if this object needs a queue_code
+      if self.queue_code.nil? || self.queue_code == ''
+        last_queue_for_ride = self.ride.quueues.alphabetical.last
 
-      # special case for the first queue
-      if last_queue_for_ride.nil?
-        self.queue_code = 'AAAA'
-      else
-        self.queue_code = last_queue_for_ride.queue_code.next
+        # special case for the first queue
+        if last_queue_for_ride.nil?
+          self.queue_code = 'AAAA'
+        else
+          self.queue_code = last_queue_for_ride.queue_code.next
+        end
       end
     end
   end
 
   def create_security_code
-    if self.security_code.nil? || self.security_code == ''
-      self.security_code = Array.new(20){[*"A".."Z"].sample}.join
+    # ensure self.ride and self.visit are defined
+    unless self.ride.nil? || self.visit.nil?
+      if self.security_code.nil? || self.security_code == ''
+        self.security_code = Array.new(20){[*"A".."Z"].sample}.join
+      end
     end
   end
 end
