@@ -5,7 +5,7 @@ class VisitTest < ActiveSupport::TestCase
   should belong_to(:park_pass)
   should validate_presence_of(:visit_date)
   should validate_presence_of(:park_pass_id)
-  
+
   should allow_value(Date.today).for(:visit_date)
   should allow_value(10.minutes.from_now).for(:visit_date)
   should allow_value(Date.tomorrow - 5.minutes).for(:visit_date)
@@ -13,4 +13,28 @@ class VisitTest < ActiveSupport::TestCase
   should_not allow_value(25.hours.from_now).for(:visit_date)
   should_not allow_value(25.hours.ago).for(:visit_date)
   should_not allow_value(Date.yesterday).for(:visit_date)
+
+  # set up context
+  context "Within context" do
+    setup do
+      create_unit_test_contexts
+    end
+
+    teardown do
+      delete_unit_test_contexts
+    end
+
+    should "validate that the today scope works" do
+      assert_equal(Visit.today.length, 3)
+    end
+
+    should "validate the timeliness of visit_date on create" do
+      bad_visit = FactoryBot.build(:visit, park_pass: @joe_fun_pass, visit_date: Date.yesterday)
+      deny bad_visit.valid?
+
+      assert @justin_visit.valid?
+      @justin_visit.visit_date = Date.yesterday
+      assert @justin_visit.valid?
+    end
+  end
 end

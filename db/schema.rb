@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.string "last_name"
     t.string "card_number"
     t.date "card_expiration"
-    t.integer "height", default: 0
+    t.integer "height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.integer "ride_id"
     t.integer "visit_id"
     t.string "queue_code"
-    t.boolean "checked_in", default: false
+    t.boolean "checked_in"
     t.string "security_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -46,10 +46,10 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.integer "ride_duration"
     t.text "ride_description"
     t.integer "cart_occupancy"
-    t.string "max_allowed_queue_code", default: 'AAAAA'
-    t.boolean "allow_queue", default: true
-    t.boolean "active", default: true
-    t.integer "min_height", default: 0
+    t.string "max_allowed_queue_code"
+    t.boolean "allow_queue"
+    t.boolean "active"
+    t.integer "min_height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ride_name"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20180624165003) do
     t.string "password_digest"
     t.string "email"
     t.string "phone"
-    t.string "role", default: 'visitor'
-    t.boolean "active", default: true
+    t.string "role"
+    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
