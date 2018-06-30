@@ -23,11 +23,13 @@ class Quueue < ApplicationRecord
   validates_format_of :queue_code, with: /\A[A-Z]{4}\z/, message: "must be four upper case letters"
   validates_format_of :security_code, with: /\A[A-Z]{20}\z/, message: "must be twenty upper case letters"
   validate :cant_check_in_without_is_ready
+  validate :ride_must_allow_queue
 
 
   # --------- #
   # callbacks #
   # --------- #
+  before_validation :create_queue_code, :create_security_code
 
 
   # ---------------- #
@@ -45,6 +47,24 @@ class Quueue < ApplicationRecord
   def cant_check_in_without_is_ready
     if self.checked_in && !self.is_ready?
       errors.add(:base, "rider is not ready to check in yet")
+    end
+  end
+
+  def ride_must_allow_queue
+    unless self.ride.nil? || self.ride.allow_queue
+      errors.add(:ride, "is not allowing queues at this time")
+    end
+  end
+
+  def create_queue_code
+    if self.queue_code.nil? || self.queue_code == ''
+      self.queue_code = self.ride.queues.alphabetical.last.next
+    end
+  end
+
+  def create_security_code
+    if self.security_code.nil? || self.security_code == ''
+      self.security_code = Array.new(20){[*"A".."Z"].sample}.join
     end
   end
 end

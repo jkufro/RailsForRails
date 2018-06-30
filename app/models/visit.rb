@@ -22,7 +22,7 @@ class Visit < ApplicationRecord
   # --------- #
   # callbacks #
   # --------- #
-  before_create :pass_cannot_be_expired
+  before_create :pass_cannot_be_expired, :visit_must_be_today
 
 
   # ---------------- #
@@ -54,6 +54,12 @@ class Visit < ApplicationRecord
   def pass_cannot_be_expired
     if self.park_pass.expired?
       errors.add(:park_pass, "is expired")
+    end
+  end
+
+  def visit_must_be_today
+    unless self.visit_date == Date.today
+      errors.add(:visit_date, "must be today")
     end
   end
 end

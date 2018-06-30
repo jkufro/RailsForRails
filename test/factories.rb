@@ -16,8 +16,8 @@ FactoryBot.define do
   end
 
   factory :quueue do
-    queue_code { Array.new(5){[*"A".."Z"].sample}.join }
-    security_code { Array.new(20){[*"A".."Z"].sample}.join }
+    queue_code ''
+    security_code ''
     checked_in false
     association :ride
     association :visit
