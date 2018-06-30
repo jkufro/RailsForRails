@@ -20,5 +20,5 @@ class ActiveSupport::TestCase
   end
 
   # Spruce up minitest results...
-  Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+  Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new]
 end
