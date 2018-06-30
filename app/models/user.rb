@@ -4,6 +4,9 @@ class User < ApplicationRecord
   # ------------ #
   has_many :park_passes
 
+  # use has_secure_password for password hashing
+  has_secure_password
+
 
   # ------ #
   # scopes #

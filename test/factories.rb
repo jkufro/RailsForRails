@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :park_pass do
     first_name "justin"
     last_name "kufro"
-    card_number { "A" + rand(10 ** 14).to_s.rjust(10,'0') }
+    card_number ''
     card_expiration 1.year.from_now
     height 58
     association :user
@@ -29,7 +29,7 @@ FactoryBot.define do
     cart_occupancy 28
     ride_duration 180
     ride_description "It goes fast!"
-    max_allowed_queue_code "AAAAA"
+    max_allowed_queue_code "AAAA"
     min_height 54
     allow_queue true
     active true

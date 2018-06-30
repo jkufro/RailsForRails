@@ -36,7 +36,7 @@ class Quueue < ApplicationRecord
   # public functions #
   # ---------------- #
   def is_ready?
-    self.queue_code > self.ride.max_allowed_queue_code && self.created_at == Date.today.beginning_of_day
+    self.queue_code <= self.ride.max_allowed_queue_code && (self.created_at.nil? || self.created_at.to_date == Date.today)
   end
 
 
@@ -57,8 +57,16 @@ class Quueue < ApplicationRecord
   end
 
   def create_queue_code
+    # check if this object needs a queue_code
     if self.queue_code.nil? || self.queue_code == ''
-      self.queue_code = self.ride.queues.alphabetical.last.next
+      last_queue_for_ride = self.ride.quueues.alphabetical.last
+
+      # special case for the first queue
+      if last_queue_for_ride.nil?
+        self.queue_code = 'AAAA'
+      else
+        self.queue_code = last_queue_for_ride.queue_code.next
+      end
     end
   end
 

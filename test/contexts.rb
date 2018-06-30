@@ -19,16 +19,19 @@ module Contexts
 
   def create_unit_test_contexts
     create_users
-    puts 'created users'
     create_rides
-    puts 'created rides'
     create_pass_types
-    puts 'created pass_types'
     create_park_passes
-    puts 'created park_passes'
     create_visits
-    puts 'created visits'
     create_quueues
-    puts 'created quueues'
+  end
+
+  def delete_unit_test_contexts
+    delete_quueues
+    delete_visits
+    delete_park_passes
+    delete_pass_types
+    delete_users
+    delete_rides
   end
 end
