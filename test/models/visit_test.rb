@@ -24,7 +24,7 @@ class VisitTest < ActiveSupport::TestCase
       delete_unit_test_contexts
     end
 
-    should "validate that the today scope works" do
+    should "validate that the today scope works as expected" do
       assert_equal(Visit.today.length, 3)
     end
 
@@ -44,14 +44,20 @@ class VisitTest < ActiveSupport::TestCase
       deny bad_visit.valid?
     end
 
-    should "show that the ridden_rides function works" do
+    should "show that the ridden_rides function works as expected" do
       assert_equal(@justin_visit.ridden_rides, [@montu])
       assert_equal(@gail_visit.ridden_rides, [])
     end
 
-    should "show that the ridden_rides_summary function works" do
+    should "show that the ridden_rides_summary function works as expected" do
       assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 1})
       assert_equal(@gail_visit.ridden_rides_summary, {})
+    end
+
+    should "show that the current_queue function works as expected" do
+      assert_nil @justin_visit.current_queue
+      assert_equal(@ashley_visit.current_queue.ride, @montu)
+      assert_equal(@gail_visit.current_queue.ride, @cobras_curse)
     end
   end
 end
