@@ -97,7 +97,11 @@ class ParkPassTest < ActiveSupport::TestCase
     end
 
     should "check that the create_card_number method works as expected" do
-
+      deny /\A[A-Z]\d{15}\z/.match(@justin_fun_pass.card_number).nil?
+      deny /\A[A-Z]\d{15}\z/.match(@ashley_fun_pass.card_number).nil?
+      deny /\A[A-Z]\d{15}\z/.match(@gail_fun_pass.card_number).nil?
+      deny /\A[A-Z]\d{15}\z/.match(@tyler_annual_pass.card_number).nil?
+      deny /\A[A-Z]\d{15}\z/.match(@joe_fun_pass.card_number).nil?
     end
   end
 end
