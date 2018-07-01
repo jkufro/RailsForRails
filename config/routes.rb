@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   post 'login' => 'sessions#create', :as => :login
   get 'logout' => 'sessions#destroy', :as => :logout
+
+  get 'index' => 'home#index', :as => :home
+  get 'login_page' => 'home#login', :as => :login_page
 end
