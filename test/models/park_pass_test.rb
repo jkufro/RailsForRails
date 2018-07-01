@@ -51,45 +51,49 @@ class ParkPassTest < ActiveSupport::TestCase
     end
 
     should "check that the ridden_rides method works as expected" do
-      assert_equal(@ashley_visit.ridden_rides, [])
-      assert_equal(@gail_visit.ridden_rides, [])
-      assert_equal(@justin_visit.ridden_rides, [@montu])
+      assert_equal(@ashley_fun_pass.ridden_rides, [])
+      assert_equal(@gail_fun_pass.ridden_rides, [])
+      assert_equal(@justin_fun_pass.ridden_rides, [@montu])
       @montu.call_queue(5)
       @justin_montu_2 = FactoryBot.create(:quueue, ride: @montu, visit: @justin_visit, checked_in: true)
-      assert_equal(@justin_visit.ridden_rides, [@montu, @montu])
+      assert_equal(@justin_fun_pass.ridden_rides, [@montu, @montu])
       @justin_montu_3 = FactoryBot.create(:quueue, ride: @montu, visit: @justin_visit, checked_in: true)
-      assert_equal(@justin_visit.ridden_rides, [@montu, @montu, @montu])
+      assert_equal(@justin_fun_pass.ridden_rides, [@montu, @montu, @montu])
       @justin_montu_4 = FactoryBot.create(:quueue, ride: @montu, visit: @justin_visit)
-      assert_equal(@justin_visit.ridden_rides, [@montu, @montu, @montu])
+      assert_equal(@justin_fun_pass.ridden_rides, [@montu, @montu, @montu])
     end
 
     should "check that the ridden_rides_summary method works as expected" do
-      assert_equal(@ashley_visit.ridden_rides_summary, {})
-      assert_equal(@gail_visit.ridden_rides_summary, {})
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 1})
+      assert_equal(@ashley_fun_pass.ridden_rides_summary, {})
+      assert_equal(@gail_fun_pass.ridden_rides_summary, {})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 1})
 
       # ride montu a few times
       @montu.call_queue(5)
       @justin_montu_2 = FactoryBot.create(:quueue, ride: @montu, visit: @justin_visit, checked_in: true)
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 2})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 2})
       @justin_montu_3 = FactoryBot.create(:quueue, ride: @montu, visit: @justin_visit, checked_in: true)
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 3})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 3})
       @justin_montu_4 = FactoryBot.create(:quueue, ride: @montu, visit: @justin_visit)
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 3})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 3})
       @justin_montu_4.checked_in = true
       @justin_montu_4.save
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 4})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 4})
 
       # ride sheikra
       @sheikra.call_queue(3)
       @justin_sheikra = FactoryBot.create(:quueue, ride: @sheikra, visit: @justin_visit, checked_in: true)
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 4, @sheikra.ride_name => 1})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 4, @sheikra.ride_name => 1})
       @justin_sheikra_2 = FactoryBot.create(:quueue, ride: @sheikra, visit: @justin_visit)
-      assert_equal(@justin_visit.ridden_rides_summary, {@montu.ride_name => 4, @sheikra.ride_name => 1})
+      assert_equal(@justin_fun_pass.ridden_rides_summary, {@montu.ride_name => 4, @sheikra.ride_name => 1})
     end
 
     should "check that the at_park? method works as expected" do
-
+      assert @justin_fun_pass.at_park?
+      assert @ashley_fun_pass.at_park?
+      assert @gail_fun_pass.at_park?
+      deny @tyler_annual_pass.at_park?
+      deny @joe_fun_pass.at_park?
     end
 
     should "check that the create_card_number method works as expected" do

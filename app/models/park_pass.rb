@@ -38,7 +38,7 @@ class ParkPass < ApplicationRecord
   def ridden_rides
     rides = []
     self.visits.each{ |v| rides << v.ridden_rides }
-    return rides
+    return rides.flatten
   end
 
   def ridden_rides_summary
@@ -49,7 +49,7 @@ class ParkPass < ApplicationRecord
   end
 
   def at_park?
-    !self.visits.today.nil?
+    !(self.visits.today == [])
   end
 
 
