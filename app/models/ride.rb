@@ -8,6 +8,11 @@ class Ride < ApplicationRecord
   # ------ #
   # scopes #
   # ------ #
+  scope :alphabetical, -> { order('ride_name') }
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
+  scope :allow_queue, -> { where(allow_queue: true) }
+  scope :doesnt_allow_queue, -> { where(allow_queue: false) }
 
 
   # ----------- #

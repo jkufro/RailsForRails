@@ -37,6 +37,26 @@ class RideTest < ActiveSupport::TestCase
       delete_unit_test_contexts
     end
 
+    should "show that the alphabetical scope works as expected" do
+      assert_equal(Ride.alphabetical.map(&:ride_name), ["Cheetah Chase", "Cobra's Curse", "Montu", "Scorpion", "SheiKra"])
+    end
+
+    should "show that the active scope works as expected" do
+      assert_equal(Ride.alphabetical.active.map(&:ride_name), ["Cobra's Curse", "Montu", "Scorpion", "SheiKra"])
+    end
+
+    should "show that the inactive scope works as expected" do
+      assert_equal(Ride.alphabetical.inactive.map(&:ride_name), ["Cheetah Chase"])
+    end
+
+    should "show that the allow_queue scope works as expected" do
+      assert_equal(Ride.alphabetical.allow_queue.map(&:ride_name), ["Cobra's Curse", "Montu", "SheiKra"])
+    end
+
+    should "show that the doesnt_allow_queue scope works as expected" do
+      assert_equal(Ride.alphabetical.doesnt_allow_queue.map(&:ride_name), ["Cheetah Chase", "Scorpion"])
+    end
+
     should "validate that a ride must be active to allow new queues" do
       bad_queue = FactoryBot.build(:quueue, ride: @scorpion, visit: @justin_visit)
       deny bad_queue.valid?
