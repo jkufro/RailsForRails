@@ -14,10 +14,10 @@
  *= require overrides
  */
 
-$primary-color: #F365c0;
-$secondary-color: #F365c0;
+$primary-color: #ff4081;
+$secondary-color: #ff80ab;
 $primary-color-light: #f48fb1;
-$secondary-color: #c51162;
+$primary-color-dark: #F365c0;
 $success-color: #00c853;
 $error-color: #ef5350;
 $link-color: #039be5;
@@ -28,6 +28,3 @@ $link-color: #039be5;
   color: $error-color;
 }
 
-#footer {
-  height: 10em;
-}
