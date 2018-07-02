@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :logged_in?
 
+  def is_admin?
+    logged_in? && current_user.role(:admin)
+  end
+
   def check_login
     redirect_to login_url, alert: "You need to log in to view this page." if current_user.nil?
   end

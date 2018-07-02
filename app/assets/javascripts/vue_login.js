@@ -4,6 +4,7 @@ function run_login_ajax(method, data, link, callback=function(res){}, err_callba
     data: data,
     url: link,
     success: function(res) {
+      console.log(res);
       callback(res);
       return true;
     },
@@ -22,7 +23,7 @@ function run_login_ajax(method, data, link, callback=function(res){}, err_callba
 /////////////////////////////////////////
 Vue.component('login_signup_error_row', {
   // Defining where to look for the HTML template in the index view
-  template: '<div class="center red-text lighten-1">{{ error }}</div>',
+  template: '<div class="center error-text">{{ error }}</div>',
 
   // Passed elements to the component from the Vue instance
   props: {
@@ -67,7 +68,8 @@ var login_instance = new Vue({
     },
     post_success: function(res) {
       this.errors = []
-      Materialize.toast(res.responseJSON.message, 3000);
+      Materialize.toast(res.message, 1000);
+      setTimeout(function(){window.location.reload();}, 1200)
     },
     post_failure: function(res) {
       this.errors = res.responseJSON.errors

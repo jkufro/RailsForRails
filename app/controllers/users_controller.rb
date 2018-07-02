@@ -11,11 +11,12 @@ class UsersController < ApplicationController
 
   def create
     pms = user_params
-    unless logged_in? && current_user.role(:admin)
+    unless is_admin?
       pms[:role] = 'visitor'
     end
     @user = User.new(pms)
     if @user.save
+      session[:user_id] = @user.id unless is_admin?
       render json: { message: "User Created" }, status: :ok
     else
       render json: { message: "Could Not Create User", errors: @user.errors.full_messages }, status: :unprocessable_entity
