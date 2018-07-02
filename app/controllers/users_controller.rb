@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:update, :destroy]
-  load_and_authorize_resource
+  before_action :set_user, only: [:show, :update, :destroy]
+
+  def index
+    render json: User.all
+  end
+
+  def show
+    render json: @user
+  end
 
   def create
     @user = User.new(user_params)

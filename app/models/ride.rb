@@ -60,6 +60,23 @@ class Ride < ApplicationRecord
     self.quueues.today.select{ |q| !q.is_ready? }
   end
 
+  def checked_in_queues
+    self.quueues.are_checked_in
+  end
+
+  def expected_wait_time
+    number_in_line = self.unready_queues.length
+    time_between_carts = self.ride_duration / self.carts_on_track
+
+    carts_before_empty_line = number_in_line / self.cart_occupancy
+    # correct any error from integer division
+    carts_before_empty_line += 1 if number_in_line % self.cart_occupancy != 0
+
+    seconds_wait_time = carts_before_empty_line * time_between_carts
+    minutes_wait_time = seconds_wait_time / 60
+    return minutes_wait_time
+  end
+
   # ----------------- #
   # private functions #
   # ----------------- #

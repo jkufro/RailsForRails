@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
 
   # handle 404 errors with an exception as well
   rescue_from ActiveRecord::RecordNotFound do |exception|
-    flash[:error] = "Sorry! That page does not exist."
-    redirect_to home_path
+    redirect_to :home
   end
 
   private
