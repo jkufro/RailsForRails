@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # home controller
   get 'index' => 'home#index', :as => :home
   get 'login_page' => 'home#login', :as => :login_page
+  root 'home#index'
 
   # users controller
   get 'users/index' => 'users#index'
