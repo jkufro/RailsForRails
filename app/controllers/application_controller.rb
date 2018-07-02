@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   def is_admin?
-    logged_in? && current_user.role(:admin)
+    logged_in? && current_user.role?(:admin)
   end
 
   def check_login

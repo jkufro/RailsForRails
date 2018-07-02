@@ -2,7 +2,9 @@ class RidesController < ApplicationController
   before_action :set_ride, only: [:show, :update, :destroy, :call_queue]
 
   def index
-    render json: Ride.all.alphabetical
+    @rides = Ride.all.alphabetical
+    @rides = @rides.allow_queue unless is_admin?
+    render json: @rides
   end
 
   def show

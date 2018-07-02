@@ -11,6 +11,7 @@ class ParkPass < ApplicationRecord
   # ------ #
   # scopes #
   # ------ #
+  scope :non_expired, ->{ where("card_expiration >= ?", Date.today) }
 
 
   # ----------- #

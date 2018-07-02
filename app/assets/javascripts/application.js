@@ -18,34 +18,21 @@
 //= require vue
 //= require_tree .
 
-
-$( document ).ready(function() {
-    var footerHeight = 0,
-           footerTop = 0,
-           $footer = $("#footer");
-
-       positionFooter();
-
-       function positionFooter() {
-
-                footerHeight = $footer.height();
-                footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
-
-               if ( ($(document.body).height()+footerHeight) < $(window).height()) {
-                   $footer.css({
-                        position: "absolute"
-                   }).animate({
-                        top: footerTop
-                   })
-               } else {
-                   $footer.css({
-                        position: "static"
-                   })
-               }
-
-       }
-
-       $(window)
-               .scroll(positionFooter)
-               .resize(positionFooter)
-});
+function run_ajax(method, data, link, callback=function(res){}, err_callback=function(res){}){
+  $.ajax({
+    method: method,
+    data: data,
+    url: link,
+    success: function(res) {
+      console.log(res);
+      callback(res);
+      return true;
+    },
+    error: function(res) {
+      console.log("error");
+      console.log(res);
+      err_callback(res);
+      return false;
+    }
+  })
+}
