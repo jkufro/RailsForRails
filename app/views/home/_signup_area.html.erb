@@ -1,0 +1,12 @@
+<div id='signup_area' class='row'>
+    <h3 class="center">Sign Up</h3>
+    <%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'login_signup_error_row' } %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'signup_username', :vmodel => 'username'} %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'signup_email', :vmodel => 'email'} %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'signup_phone', :vmodel => 'phone'} %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'signup_password', :vmodel => 'password', :type => 'password'} %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'signup_password_confirmation', :vmodel => 'password_confirmation', :type => 'password'} %>
+    <div class='center-align'>
+        <button class='waves-effect waves-light btn btn-submit' v-on:click="submit_signup()">Sign Up</button>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div id='login_area' class='row'>
+    <h3 class="center">Login</h3>
+    <%= render partial: 'login_signup_errors' %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'login_username', :vmodel => 'username'} %>
+    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'login_password', :vmodel => 'password', :type => 'password'} %>
+    <div class='center-align'>
+        <button class='waves-effect waves-light btn btn-submit' v-on:click="submit_login()">Login</button>
+    </div>
+</div>

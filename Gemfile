@@ -47,6 +47,14 @@ gem 'faker', '1.8.7'
 # Used for API serializers
 gem 'active_model_serializers'
 
+# Materialize and UI gems
+gem 'materialize-sass', '0.100.2'
+gem 'materialize-form', '1.0.8'
+gem 'simple_form', '3.5.0'
+gem 'jquery-rails', '4.3.1'
+gem 'jquery-ui-rails', '6.0.1'
+gem 'vuejs-rails', '2.5.13'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

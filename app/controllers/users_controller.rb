@@ -10,7 +10,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    pms = user_params
+    unless logged_in? && current_user.role(:admin)
+      pms[:role] = 'visitor'
+    end
+    @user = User.new(pms)
     if @user.save
       render json: { message: "User Created" }, status: :ok
     else
@@ -41,7 +45,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :phone, :active, :role, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :phone, :role, :password, :password_confirmation)
     end
 
     def new_password_params

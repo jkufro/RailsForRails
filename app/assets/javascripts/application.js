@@ -11,5 +11,9 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
+//= require jquery
+//= require rails-ujs
+//= require materialize-sprockets
+//= require materialize-form
+//= require vue
 //= require_tree .

@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
-
   def create
     req = login_params
     un = login_params[:username]
@@ -15,7 +13,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         render json: { message: "Logged In" }, status: :ok
       else
-        render json: { message: "Invalid Credentials" }, status: :unprocessable_entity
+        render json: { message: "Invalid Credentials", errors: ['Invalid Credentials'] }, status: :unprocessable_entity
       end
 
   end
