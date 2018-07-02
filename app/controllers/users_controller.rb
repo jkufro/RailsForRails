@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    render json: User.all
+    render json: User.all.alphabetical
   end
 
   def show

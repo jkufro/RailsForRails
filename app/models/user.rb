@@ -11,6 +11,7 @@ class User < ApplicationRecord
   # ------ #
   # scopes #
   # ------ #
+  scope :alphabetical, -> { order('username') }
 
 
   # ----------- #

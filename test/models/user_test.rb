@@ -50,6 +50,10 @@ class UserTest < ActiveSupport::TestCase
       delete_users
     end
 
+    should "show that the alpabetical scope works as expected" do
+      assert_equal(User.alphabetical.map(&:username), ['gkufro', 'jkufro', 'root', 'tkufro'])
+    end
+
     should "require users to have unique, case-insensitive usernames" do
       assert_equal "jkufro", @justin.username
 

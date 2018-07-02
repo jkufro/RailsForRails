@@ -110,5 +110,17 @@ class RideTest < ActiveSupport::TestCase
       @cheetah_chase.allow_queue = true
       deny @cheetah_chase.valid?
     end
+
+    should "checked_in_queues function should work as expected" do
+      assert_equal(@montu.checked_in_queues.length, 1)
+      assert_equal(@sheikra.checked_in_queues.length, 0)
+      assert_equal(@montu.checked_in_queues, [@justin_montu])
+      assert_equal(@sheikra.checked_in_queues, [])
+    end
+
+    should "expected_wait_time function should work as expected" do
+      assert_equal(@montu.expected_wait_time, 1)
+      assert_equal(@sheikra.expected_wait_time, 0)
+    end
   end
 end
