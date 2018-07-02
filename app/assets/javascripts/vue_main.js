@@ -33,6 +33,10 @@ var main_area_instance = new Vue({
         main_area_instance.get_rides();
         main_area_instance.get_users();
         main_area_instance.get_park_passes();
+
+        $('#logout_button').click(function() {
+          main_area_instance.logout();
+        })
       });
     },
 
@@ -70,6 +74,13 @@ var main_area_instance = new Vue({
       },
       post_failure: function(res) {
         this.errors = res.responseJSON.errors
+      },
+      logout: function() {
+        run_ajax('GET', {}, '/logout', this.logout_success);
+      },
+      logout_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        setTimeout(function(){window.location.reload();}, 1200);
       }
     }
 });
