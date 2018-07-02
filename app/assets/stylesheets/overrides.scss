@@ -1,7 +1,13 @@
 body {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 
-footer {
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+main {
+  flex: 1 0 auto;
 }

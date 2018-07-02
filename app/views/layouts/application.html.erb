@@ -8,17 +8,15 @@
     </head>
 
     <body>
-        <%= render :partial => "partials/header" %>
+        <%= render :partial => "partials/nav" %>
 
-        <%= yield %>
+        <main>
+            <%= yield %>
 
-        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+            <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+            <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+        </main>
+
+        <%= render :partial => "partials/footer" %>
     </body>
-
-    <footer>
-        <div class="center-align" id="footer">
-            <%= render partial: 'partials/footer' %>
-        </div>
-    </footer>
 </html>
