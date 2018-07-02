@@ -56,10 +56,10 @@ var main_area_instance = new Vue({
         run_ajax('GET', {}, '/park_passes/index', this.set_park_passes, this.get_park_passes_failure);
       },
       set_park_passes: function(res) {
-        self.park_passes = res;
+        this.park_passes = res;
       },
       get_park_passes_failure: function() {
-        self.park_passes = [];
+        this.park_passes = [];
       },
       get_users_failure(res) {
         this.users = [];
