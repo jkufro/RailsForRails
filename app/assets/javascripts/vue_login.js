@@ -48,6 +48,20 @@ var login_instance = new Vue({
       errors: []
     },
 
+    mounted: function() {
+      $('#login_area').keypress(function(e) {
+        if(e.which == 13) {
+          login_instance.submit_login();
+        }
+      });
+
+      $('#signup_area').keypress(function(e) {
+        if(e.which == 13) {
+          login_instance.submit_signup();
+        }
+      });
+    },
+
     methods: {
     submit_login: function(event) {
       new_post = {
