@@ -29,4 +29,7 @@ Rails.application.routes.draw do
 
   # park passes controller
   get 'park_passes/index' => 'park_passes#index'
+
+  # quueues controller
+  get 'queues/:id/cancel' => 'quueue#cancel'
 end
