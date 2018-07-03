@@ -1,8 +1,8 @@
 FactoryBot.define do
 
   factory :park_pass do
-    first_name "justin"
-    last_name "kufro"
+    first_name "Justin"
+    last_name "Kufro"
     card_number ''
     card_expiration 1.year.from_now
     height 58

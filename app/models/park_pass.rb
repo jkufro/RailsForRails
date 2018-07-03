@@ -53,6 +53,16 @@ class ParkPass < ApplicationRecord
     !(self.visits.today == [])
   end
 
+  def current_queue
+    todays_visit = self.visits.today
+    unless todays_visit == []
+        todays_visit = todays_visit.first
+        cur_queue = todays_visit.current_queue
+        return nil if cur_queue.nil?
+        return cur_queue
+    end
+    return nil
+  end
 
   # ----------------- #
   # private functions #

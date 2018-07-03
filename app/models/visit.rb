@@ -40,7 +40,7 @@ class Visit < ApplicationRecord
   end
 
   def current_queue
-    latest = self.quueues.alphabetical.last
+    latest = self.quueues.last
     unless latest.nil? || latest.checked_in
       return latest
     end

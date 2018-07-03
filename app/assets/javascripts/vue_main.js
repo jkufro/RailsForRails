@@ -24,12 +24,26 @@ Vue.component('current-queue-row', {
     this.finder = '#' + this.park_pass.current_queue.security_code;
     $(this.finder + '.btn').hide();
     $(this.finder + '.queue_more_vert_wrapper').click({ finder: this.finder }, function(event) {
-      console.log(event.data.finder + '.btn')
       $(event.data.finder + '.btn').toggle();
     });
-    $(this.finder + '.btn').click({queue_id: this.park_pass.current_queue.id}, function(event) {
-      run_ajax('GET', {}, '/queues/' + event.data.queue_id + '/cancel', main_area_instance.get_park_passes, main_area_instance.get_park_passes);
+    $(this.finder + '.btn').click({callback: this.cancel_queue}, function(event) {
+      event.data.callback();
     });
+  },
+
+  methods: {
+    cancel_queue: function() {
+      path = '/queues/' + this.park_pass.current_queue.id + '/cancel'
+      run_ajax('GET', {}, path, this.cancel_queue_success, this.cancel_queue_failure);
+    },
+    cancel_queue_success: function(res) {
+      Materialize.toast(res.message, 1000);
+      main_area_instance.get_park_passes();
+    },
+    cancel_queue_failure: function(res) {
+      Materialize.toast('Failed To Cancel Queue', 1000);
+      main_area_instance.get_park_passes();
+    }
   },
 });
 

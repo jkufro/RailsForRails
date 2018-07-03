@@ -59,6 +59,7 @@ namespace :db do
     # Step 6: Create some quueues
     justin_montu = FactoryBot.create(:quueue, ride: montu, visit: justin_visit, checked_in: true)
     ashley_montu = FactoryBot.create(:quueue, ride: montu, visit: ashley_visit)
+    justin_sheikra = FactoryBot.create(:quueue, ride: sheikra, visit: justin_visit)
     gail_cobras_curse = FactoryBot.create(:quueue, ride: cobras_curse, visit: gail_visit)
     puts("Created Quueues\n")
   end

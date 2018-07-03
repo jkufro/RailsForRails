@@ -6,14 +6,8 @@ class ParkPassSerializer < ActiveModel::Serializer
   end
 
   def current_queue
-    todays_visit = object.visits.today
-    unless todays_visit == []
-        todays_visit = todays_visit.first
-        cur_queue = todays_visit.current_queue
-        return nil if cur_queue.nil?
-        return QuueueSerializer.new(cur_queue)
-    end
-    return nil
+    cur_queue = object.current_queue
+    return QuueueSerializer.new(cur_queue) unless cur_queue.nil?
   end
 
   def visits
