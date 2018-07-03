@@ -25,8 +25,6 @@ Vue.component('current-queue-row', {
     this.button_finder = this.finder + ' div div div.queue_cancel_wrapper a.btn';
     this.more_vert_finder = this.finder + ' div div div.queue_more_vert_wrapper';
     this.summary_finder = this.finder + ' div div div.queue_summary_wrapper';
-    this.wait_text_finder = this.summary_finder + ' p span.queue_wait_text';
-    this.queue_code_text_finder = this.summary_finder + ' p span.queue_code_text';
     this.queue_details_finder = this.finder + ' div div.queue_details'
 
     $(this.button_finder).hide();
@@ -37,7 +35,7 @@ Vue.component('current-queue-row', {
       event.data.callback();
     });
 
-    $(this.finder).click({ finder: this.queue_details_finder }, function(event) {
+    $(this.summary_finder).click({ finder: this.queue_details_finder }, function(event) {
       $(event.data.finder).toggle();
     });
 
@@ -69,6 +67,7 @@ Vue.component('current-queue-row', {
       return wait_text
     },
     is_ready: function() {
+      console.log(this.park_pass.current_queue.expected_wait);
       if (this.park_pass.current_queue.expected_wait == 0) {
         return true
       } else {
