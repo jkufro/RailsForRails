@@ -1,3 +1,14 @@
 <script type="text/x-template" id="current-queue-template">
-    <p>{{ park_pass.first_name }} for {{ park_pass.current_queue.ride_name }}: {{ park_pass.current_queue.expected_wait }} minute(s)</p>
+<div class='row card'>
+    <div class='col s12 card-content'>
+        <div class='row valign-wrapper left-align no-margin-bottom'>
+            <div class='col s10'>
+                <p class='flow-text '>{{ park_pass.first_name }} for {{ park_pass.current_queue.ride_name }}: {{ park_pass.current_queue.expected_wait }} minute(s)</p>
+            </div>
+            <div class='col s2 queue_more_vert_wrapper' :id="park_pass.current_queue.security_code">
+                <i class="material-icons center-align valign-wrapper queue_more_vert">more_vert</i>
+            </div>
+        </div>
+    </div>
+</div>
 </script>

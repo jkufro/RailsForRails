@@ -67,8 +67,12 @@ class Ride < ApplicationRecord
   def expected_wait_time(queue_code=nil)
     if queue_code.nil?
       number_in_line = self.unready_queues.length
+      # accurately report empty lines
+      return 0 if number_in_line <= 0
     else
       number_in_line = distance_between_queues(self.max_allowed_queue_code, queue_code)
+      # prevents reporting waits when the code is actually ready
+      return 0 if queue_code <= self.max_allowed_queue_code
     end
     time_between_carts = self.ride_duration / self.carts_on_track
 
