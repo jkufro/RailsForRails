@@ -1,12 +1,14 @@
 <script type="text/x-template" id="ride-template">
 <div class='row card no-margin-bottom no-margin-top'>
     <div class='col s12 card-content'>
-        <div class='row valign-wrapper left-align no-margin-bottom'>
-            <div class='col s8'>
-                <p class='flow-text truncate'>{{ ride.ride_name }}</p>
+        <div class='row valign-wrapper no-margin-bottom'>
+            <div class='col s12'>
+                <h3 class='center-align truncate'>{{ ride.ride_name }}</h3>
             </div>
-            <div class='col s4'>
-                <p class='flow-text truncate'>Wait: {{ ride.expected_wait_time }} minutes</p>
+        </div>
+        <div class='row no-margin-bottom'>
+            <div class='col s12'>
+                <p class='center-align flow-text'>{{ ride.expected_wait_time }} minutes</p>
             </div>
         </div>
     </div>
