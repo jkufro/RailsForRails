@@ -11,6 +11,15 @@ Vue.component('ride-row', {
   },
 });
 
+Vue.component('current-queue-row', {
+  // Defining where to look for the HTML template in the index view
+  template: '#current-queue-template',
+
+  // Passed elements to the component from the Vue instance
+  props: {
+    park_pass: Object
+  },
+});
 
 //////////////////////////////////////////
 ////***   The Vue instance itself  ***////

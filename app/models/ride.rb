@@ -64,8 +64,12 @@ class Ride < ApplicationRecord
     self.quueues.are_checked_in
   end
 
-  def expected_wait_time
-    number_in_line = self.unready_queues.length
+  def expected_wait_time(queue_code=nil)
+    if queue_code.nil?
+      number_in_line = self.unready_queues.length
+    else
+      number_in_line = distance_between_queues(self.max_allowed_queue_code, queue_code)
+    end
     time_between_carts = self.ride_duration / self.carts_on_track
 
     carts_before_empty_line = number_in_line / self.cart_occupancy
@@ -81,6 +85,10 @@ class Ride < ApplicationRecord
   # private functions #
   # ----------------- #
   private
+  def distance_between_queues(q1, q2)
+    (q1.to_i(16) - q2.to_i(16)).abs
+  end
+
   def ride_must_be_active_to_allow_queue
     if !self.active && self.allow_queue
       errors.add(:allow_queue, "cannot be on if ride is inactive")
