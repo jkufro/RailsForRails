@@ -22,13 +22,26 @@ Vue.component('current-queue-row', {
 
   mounted: function() {
     this.finder = '#' + this.park_pass.current_queue.security_code;
-    $(this.finder + '.btn').hide();
-    $(this.finder + '.queue_more_vert_wrapper').click({ finder: this.finder }, function(event) {
-      $(event.data.finder + '.btn').toggle();
+    this.button_finder = this.finder + ' div div div.queue_cancel_wrapper a.btn';
+    this.more_vert_finder = this.finder + ' div div div.queue_more_vert_wrapper';
+    this.summary_finder = this.finder + ' div div div.queue_summary_wrapper';
+    this.wait_text_finder = this.summary_finder + ' p span.queue_wait_text';
+    this.queue_code_text_finder = this.summary_finder + ' p span.queue_code_text';
+    this.queue_details_finder = this.finder + ' div div.queue_details'
+
+    $(this.button_finder).hide();
+    $(this.more_vert_finder).click({ finder: this.button_finder }, function(event) {
+      $(event.data.finder).toggle();
     });
-    $(this.finder + '.btn').click({callback: this.cancel_queue}, function(event) {
+    $(this.button_finder).click({callback: this.cancel_queue}, function(event) {
       event.data.callback();
     });
+
+    $(this.finder).click({ finder: this.queue_details_finder }, function(event) {
+      $(event.data.finder).toggle();
+    });
+
+    $(this.queue_details_finder).hide();
   },
 
   methods: {
@@ -43,6 +56,24 @@ Vue.component('current-queue-row', {
     cancel_queue_failure: function(res) {
       Materialize.toast('Failed To Cancel Queue', 1000);
       main_area_instance.get_park_passes();
+    },
+    queue_context_text: function() {
+      return this.park_pass.first_name + " - " + this.park_pass.current_queue.ride_name + " "
+    },
+    queue_wait_text: function() {
+      if (this.park_pass.current_queue.expected_wait == 0) {
+        wait_text = "Ready";
+      } else {
+        wait_text = this.park_pass.current_queue.expected_wait + " min"
+      }
+      return wait_text
+    },
+    is_ready: function() {
+      if (this.park_pass.current_queue.expected_wait == 0) {
+        return true
+      } else {
+        return false
+      }
     }
   },
 });

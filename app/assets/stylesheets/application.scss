@@ -18,7 +18,7 @@ $primary-color: #ff4081;
 $secondary-color: #ff80ab;
 $primary-color-light: #f48fb1;
 $primary-color-dark: #F365c0;
-$success-color: #00c853;
+$success-color: #4caf50;
 $error-color: #ef5350;
 $link-color: #039be5;
 
@@ -40,4 +40,19 @@ $link-color: #039be5;
     font-size: 2rem;
 }
 
-.no-margin-bottom {margin-bottom:0px !important}
+.no-margin-bottom { margin-bottom:0px !important }
+.no-margin-top { margin-top:0px !important }
+
+.queue_code_text {
+    font-weight: 800;
+    font-size: 1.75rem;
+}
+
+.queue_wait_text {
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.ready_queue {
+    color: $success-color;
+}

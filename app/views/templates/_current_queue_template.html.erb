@@ -1,15 +1,21 @@
 <script type="text/x-template" id="current-queue-template">
-<div class='row card'>
+<div class='row card no-margin-bottom no-margin-top' :id="park_pass.current_queue.security_code">
     <div class='col s12 card-content'>
         <div class='row valign-wrapper left-align no-margin-bottom'>
-            <div class='col s10'>
-                <p class='flow-text truncate'>{{ park_pass.first_name }} for {{ park_pass.current_queue.ride_name }}: {{ park_pass.current_queue.expected_wait }} minute(s)</p>
+            <div class='col s10 queue_summary_wrapper'>
+                <p class='flow-text truncate'><span class="queue_code_text" v-bind:class="{ ready_queue: is_ready }">{{ park_pass.current_queue.queue_code }} </span>{{ queue_context_text() }}<span class='queue_wait_text' v-bind:class="{ ready_queue: is_ready }">{{ queue_wait_text() }} </span></p>
             </div>
-            <div class='col s2 queue_more_vert_wrapper' :id="park_pass.current_queue.security_code">
+            <div class='col s2 queue_more_vert_wrapper'>
                 <i class="material-icons center-align valign-wrapper queue_more_vert">more_vert</i>
             </div>
-            <div class='right'>
-                <a class="waves-effect waves-light btn" :id="park_pass.current_queue.security_code">Remove</a>
+            <div class=' queue_cancel_wrapper'>
+                <a class="waves-effect waves-light btn"><i class="material-icons">delete</i></a>
+            </div>
+        </div>
+
+        <div class='queue_details row valign-wrapper center-align no-margin-bottom'>
+            <div class='col s12'>
+                <p class='flow-text'>{{ park_pass.current_queue.security_code }}</p>
             </div>
         </div>
     </div>
