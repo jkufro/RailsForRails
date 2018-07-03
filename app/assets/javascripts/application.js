@@ -39,5 +39,4 @@ function run_ajax(method, data, link, callback=function(res){}, err_callback=fun
 
 $( document ).ready(function() {
 
-  $('.dropdown-trigger').dropdown();
 });

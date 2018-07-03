@@ -21,9 +21,13 @@ Vue.component('current-queue-row', {
   },
 
   mounted: function() {
-    this.finder = '#' + this.park_pass.current_queue.security_code + ".queue_more_vert_wrapper";
-    console.log(this.park_pass)
-    $(this.finder).click({queue_id: this.park_pass.current_queue.id}, function(event) {
+    this.finder = '#' + this.park_pass.current_queue.security_code;
+    $(this.finder + '.btn').hide();
+    $(this.finder + '.queue_more_vert_wrapper').click({ finder: this.finder }, function(event) {
+      console.log(event.data.finder + '.btn')
+      $(event.data.finder + '.btn').toggle();
+    });
+    $(this.finder + '.btn').click({queue_id: this.park_pass.current_queue.id}, function(event) {
       run_ajax('GET', {}, '/queues/' + event.data.queue_id + '/cancel', main_area_instance.get_park_passes, main_area_instance.get_park_passes);
     });
   },
