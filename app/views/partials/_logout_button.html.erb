@@ -1,3 +1,5 @@
-<ul id="logout_button" class="right clickable">
-    <li><i class="material-icons">exit_to_app</i></li>
-</ul>
+<% if logged_in? %>
+    <ul id="logout_button" class="right clickable">
+        <li><i class="material-icons">exit_to_app</i></li>
+    </ul>
+<% end %>
