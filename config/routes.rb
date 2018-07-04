@@ -32,4 +32,5 @@ Rails.application.routes.draw do
 
   # quueues controller
   get 'queues/:id/cancel' => 'quueue#cancel'
+  get 'queues/:ride_id/create/:park_pass_id' => 'quueue#create'
 end

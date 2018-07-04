@@ -37,6 +37,19 @@ function run_ajax(method, data, link, callback=function(res){}, err_callback=fun
   })
 }
 
+function get_eligible_passes(all_passes) {
+  // get the park passes that can enter a new queue
+  eligible_passes = []
+  for (var i = 0; i < all_passes.length; i++) {
+    this_pass = all_passes[i]
+    if ((this_pass.at_park) && (!this_pass.current_queue)) {
+      eligible_passes.push(this_pass);
+    }
+  }
+  return eligible_passes;
+}
+
+
 $( document ).ready(function() {
 
 });

@@ -3,7 +3,7 @@
     <div class='col s12 card-content'>
         <div class='row valign-wrapper left-align no-margin-bottom'>
             <div class='col s3 queue_summary_wrapper'>
-                <p class='flow-text truncate'><span class='queue_wait_text' v-bind:class="{ ready_queue: is_ready() }">{{ queue_wait_text() }} </span></p>
+                <p class='flow-text truncate'><span class='queue_wait_text' v-bind:class="{ ready_queue: park_pass.current_queue.is_ready }">{{ queue_wait_text() }} </span></p>
             </div>
             <div class='col s7 queue_summary_wrapper'>
                 <p class='flow-text truncate'>{{ queue_context_text() }}</p>
@@ -18,7 +18,7 @@
 
         <div class='queue_details row valign-wrapper center-align no-margin-bottom'>
             <div class='col s12'>
-                <p class='flow-text'><span class="queue_code_text" v-bind:class="{ ready_queue: is_ready() }">{{ park_pass.current_queue.queue_code }} </span></p>
+                <p class='flow-text'><span class="queue_code_text" v-bind:class="{ ready_queue: park_pass.current_queue.is_ready }">{{ park_pass.current_queue.queue_code }} </span></p>
             </div>
         </div>
         <div class='queue_details row valign-wrapper center-align no-margin-bottom'>

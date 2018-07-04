@@ -7,14 +7,14 @@ Vue.component('ride-row', {
 
   // Passed elements to the component from the Vue instance
   props: {
-    ride: Object
+    ride: Object,
+    park_passes: Array
   },
 
   mounted: function() {
     this.finder = ('#' + this.ride.ride_name).replace(' ', '-').replace("'", '');
     this.summary_finder = this.finder + ' div div.ride_summary'
     this.ride_details_finder = this.finder + ' div div.ride_details';
-    console.log(this.ride_details_finder);
     $(this.ride_details_finder).hide();
 
     $(this.summary_finder).click({finder: this.ride_details_finder }, function(event) {
@@ -23,7 +23,27 @@ Vue.component('ride-row', {
   },
 
   methods: {
-
+    create_queue: function(pass_id) {
+      path = '/queues/' + this.ride.id + '/create/' + pass_id
+      run_ajax('GET', {}, path, this.create_queue_success, this.create_queue_failure);
+    },
+    create_queue_success: function(res) {
+      Materialize.toast(res.message, 1000);
+      main_area_instance.get_park_passes();
+      main_area_instance.get_rides();
+    },
+    create_queue_failure: function(res) {
+      Materialize.toast(res.responseJSON.message, 1000);
+      main_area_instance.get_park_passes();
+      main_area_instance.get_rides();
+    },
+    has_eligible_passes: function() {
+      if (get_eligible_passes(this.park_passes).length > 0) {
+        return true
+      } else {
+        return false;
+      }
+    }
   }
 });
 
@@ -75,20 +95,16 @@ Vue.component('current-queue-row', {
       return this.park_pass.first_name + " - " + this.park_pass.current_queue.ride_name + " "
     },
     queue_wait_text: function() {
-      if (this.park_pass.current_queue.expected_wait == 0) {
+      if (this.park_pass.current_queue.is_ready) {
         wait_text = "Ready";
+      }
+      else if (this.park_pass.current_queue.expected_wait == 0) {
+        wait_text = "< 1 min"
       } else {
         wait_text = this.park_pass.current_queue.expected_wait + " min"
       }
       return wait_text
     },
-    is_ready: function() {
-      if (this.park_pass.current_queue.expected_wait == 0) {
-        return true
-      } else {
-        return false
-      }
-    }
   },
 });
 
