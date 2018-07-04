@@ -141,6 +141,9 @@ var main_area_instance = new Vue({
           main_area_instance.get_users();
           main_area_instance.get_park_passes();
           main_area_instance.get_rides();
+
+          // start the cooldown so users dont slow the server
+          // from spamming the refresh button
           main_area_instance.recent_refresh = true;
           setTimeout(function() {
             main_area_instance.recent_refresh = false;
