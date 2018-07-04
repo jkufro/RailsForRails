@@ -1,6 +1,7 @@
 <script type="text/x-template" id="ride-template">
 <div class='row card no-margin-bottom no-margin-top' :id="ride.ride_name.replace(' ', '-').replace('\'', '')">
     <div class='col s12 card-content'>
+        <span class='ride_min_hieght flow-text'>{{ ride.min_height }}"</span>
         <div class='row valign-wrapper no-margin-bottom ride_summary'>
             <div class='col s12'>
                 <h3 class='center-align truncate'>{{ ride.ride_name }}</h3>
@@ -16,7 +17,12 @@
             <div class='col s12'>
                 <div class='row'>
                     <div class='col s12'>
-                        test
+                        <p class='flow-text queue_code_text'>{{ ride.max_allowed_queue_code }}</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col s12'>
+                        <p class='flow-text'>{{ ride.ride_description }}</p>
                     </div>
                 </div>
             </div>
