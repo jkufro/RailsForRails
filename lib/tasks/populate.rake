@@ -15,13 +15,22 @@ namespace :db do
     require 'factory_bot_rails'
 
     # Step 1: Create some rides
-    montu = FactoryBot.create(:ride)
-    sheikra = FactoryBot.create(:ride, ride_name: 'SheiKra', carts_on_track: 3, cart_occupancy: 24, ride_duration: 140, ride_description: 'No Floors!')
-    cobras_curse = FactoryBot.create(:ride, ride_name: "Cobra's Curse", carts_on_track: 8, cart_occupancy: 4, ride_duration: 180, ride_description: 'Spin!', min_height: 48)
-    cheetah_hunt = FactoryBot.create(:ride, ride_name: 'Cheetah Hunt', carts_on_track: 5, cart_occupancy: 16, ride_duration: 210, ride_description: 'Channel your inner cheetah!', min_height: 48)
-    sand_serpent = FactoryBot.create(:ride, ride_name: 'Sand Serpent', carts_on_track: 5, cart_occupancy: 4, ride_duration: 120, ride_description: 'Watch for the tight corners!', min_height: 48)
-    kumba = FactoryBot.create(:ride, ride_name: 'Kumba', carts_on_track: 3, cart_occupancy: 16, ride_duration: 174, ride_description: "Had the world's tallest vertical loop!")
-    scorpion = FactoryBot.create(:ride, ride_name: 'Scorpion', carts_on_track: 1, cart_occupancy: 16, ride_duration: 60, ride_description: 'Try out the loop!', min_height: 48, allow_queue: false)
+    montu_desc = "Florida’s favorite inverted coaster! Intense thrills meet smooth-as-silk steel on this classic, a favorite of coaster enthusiasts for its speeds and inversions.  Whether you speak coaster or not, come see why Montu® means thrills to roller coaster enthusiasts in any language."
+    sheikra_desc = "200-foot tall floorless dive coaster! Climb 200 feet to the edge of a 90-degree drop that inches you mercilessly over the edge—and stops. Then surrender to speed as you dive straight down into a 70 mph roller coaster whirlwind with an Immelmann loop, a second dive into an underground tunnel and a splashdown finale that drenches SheiKra® fans waiting to catch their own piece of the fun."
+    cobras_curse_desc = "Florida's first family spin coaster! This one-of-a-kind roller coaster features a menacing 30,000-pound snake king and a 70-foot vertical lift that will take riders within inches of its 3 foot-wide eyes and 4-foot-long fangs. During the three-and-a-half-minute ride, the coaster trains speed along at 40 mph down 2,100 feet of serpentine-like track, traveling backward, forward and then spinning freely."
+    cheetah_hunt_desc = "Thrilling triple-launch roller coaster. A celebration of the fastest land animal, Tampa Bay’s longest roller coaster quickly raced and weaved its way onto the list of coaster favorites. This triple launch roller coaster carries riders high above the park, then races down along the ground through a rocky gorge. At a length of 4,400 feet, Cheetah Hunt® is the park’s longest thrill ride attraction!"
+    sand_serpent_desc = 'Wild adventure 5 stories high! Families will love the curves, drops, and corkscrews of this "wild-mouse" style roller coaster located in the Pantopia® area of the park. SandSerpent is a fun-filled family coaster that zips, zooms and climbs five stories into the air before bringing riders back down in a roar of laughter.'
+    kumba_desc = "Legendary steel coaster that roars! Named for the distant roar of the king of the jungle, see why this legendary roller coaster still reigns on so many lists of favorites. After the thrill of an initial 135 foot drop, you will plunge into a diving loop, feel a full 3 seconds of absolute weightlessness while spiraling 360 degrees!"
+    scorpion_desc = "360-degree vertical loop, upside down! The Scorpion® is one of only three roller coasters of its kind remaining in the world today, yet its sting is every bit as effective at instilling thrills through every twist and turn. Scorpion pulls you through a 360 degree loop and speeds of 50 miles per hour!"
+
+
+    montu = FactoryBot.create(:ride, ride_description: montu_desc)
+    sheikra = FactoryBot.create(:ride, ride_name: 'SheiKra', carts_on_track: 3, cart_occupancy: 24, ride_duration: 140, ride_description: sheikra_desc)
+    cobras_curse = FactoryBot.create(:ride, ride_name: "Cobra's Curse", carts_on_track: 8, cart_occupancy: 4, ride_duration: 180, ride_description: cobras_curse_desc, min_height: 48)
+    cheetah_hunt = FactoryBot.create(:ride, ride_name: 'Cheetah Hunt', carts_on_track: 5, cart_occupancy: 16, ride_duration: 210, ride_description: cheetah_hunt_desc, min_height: 48)
+    sand_serpent = FactoryBot.create(:ride, ride_name: 'Sand Serpent', carts_on_track: 5, cart_occupancy: 4, ride_duration: 120, ride_description: sand_serpent_desc, min_height: 48)
+    kumba = FactoryBot.create(:ride, ride_name: 'Kumba', carts_on_track: 3, cart_occupancy: 16, ride_duration: 174, ride_description: kumba_desc)
+    scorpion = FactoryBot.create(:ride, ride_name: 'Scorpion', carts_on_track: 1, cart_occupancy: 16, ride_duration: 60, ride_description: scorpion_desc, min_height: 48, allow_queue: false)
     gwazi = FactoryBot.create(:ride, ride_name: 'Gwazi', carts_on_track: 4, cart_occupancy: 24, ride_duration: 150, ride_description: 'Permanently closed wooden coaster.', min_height: 48, allow_queue: false, active: false)
     puts("Created Rides\n")
 
