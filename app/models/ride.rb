@@ -70,9 +70,9 @@ class Ride < ApplicationRecord
       # accurately report empty lines
       return 0 if number_in_line <= 0
     else
-      number_in_line = distance_between_queues(self.max_allowed_queue_code, queue_code)
       # prevents reporting waits when the code is actually ready
       return 0 if queue_code <= self.max_allowed_queue_code
+      number_in_line = distance_between_queues(self.max_allowed_queue_code, queue_code)
     end
     time_between_carts = self.ride_duration / self.carts_on_track
 
@@ -89,8 +89,16 @@ class Ride < ApplicationRecord
   # private functions #
   # ----------------- #
   private
+  def queue_to_number(queue_code)
+    base = "A".ord
+    i0 = (queue_code[0].ord - base) * (26 ** 3)
+    i1 = (queue_code[1].ord - base) * (26 ** 2)
+    i2 = (queue_code[2].ord - base) * (26 ** 1)
+    i3 = (queue_code[3].ord - base) * (26 ** 0)
+    return i0 + i1 + i2 + i3
+  end
   def distance_between_queues(q1, q2)
-    (q1.to_i(16) - q2.to_i(16)).abs
+    (queue_to_number(q1) - queue_to_number(q2)).abs
   end
 
   def ride_must_be_active_to_allow_queue

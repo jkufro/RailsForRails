@@ -23,7 +23,6 @@ namespace :db do
     kumba_desc = "Legendary steel coaster that roars! Named for the distant roar of the king of the jungle, see why this legendary roller coaster still reigns on so many lists of favorites. After the thrill of an initial 135 foot drop, you will plunge into a diving loop, feel a full 3 seconds of absolute weightlessness while spiraling 360 degrees!"
     scorpion_desc = "360-degree vertical loop, upside down! The Scorpion® is one of only three roller coasters of its kind remaining in the world today, yet its sting is every bit as effective at instilling thrills through every twist and turn. Scorpion pulls you through a 360 degree loop and speeds of 50 miles per hour!"
 
-
     montu = FactoryBot.create(:ride, ride_description: montu_desc)
     sheikra = FactoryBot.create(:ride, ride_name: 'SheiKra', carts_on_track: 3, cart_occupancy: 24, ride_duration: 140, ride_description: sheikra_desc)
     cobras_curse = FactoryBot.create(:ride, ride_name: "Cobra's Curse", carts_on_track: 8, cart_occupancy: 4, ride_duration: 180, ride_description: cobras_curse_desc, min_height: 48)
@@ -32,21 +31,42 @@ namespace :db do
     kumba = FactoryBot.create(:ride, ride_name: 'Kumba', carts_on_track: 3, cart_occupancy: 16, ride_duration: 174, ride_description: kumba_desc)
     scorpion = FactoryBot.create(:ride, ride_name: 'Scorpion', carts_on_track: 1, cart_occupancy: 16, ride_duration: 60, ride_description: scorpion_desc, min_height: 48, allow_queue: false)
     gwazi = FactoryBot.create(:ride, ride_name: 'Gwazi', carts_on_track: 4, cart_occupancy: 24, ride_duration: 150, ride_description: 'Permanently closed wooden coaster.', min_height: 48, allow_queue: false, active: false)
+    queueable_rides = [montu, sheikra, cobras_curse, cheetah_hunt, sand_serpent, kumba]
     puts("Created Rides\n")
 
 
-    # Step 2: Create some users
+    # Step 2: Create some pass types
+    fun_pass = FactoryBot.create(:pass_type)
+    annual_pass = FactoryBot.create(:pass_type, pass_name: 'Annual Pass', description: 'Pay each month and get great park benefits')
+    puts("Created Pass Types\n")
+
+
+    # Step 3: Create some users
     admin = FactoryBot.create(:user)
     justin = FactoryBot.create(:user, username: 'jkufro', role: 'visitor')
     tyler = FactoryBot.create(:user, username: 'tkufro', role: 'visitor')
     gail = FactoryBot.create(:user, username: 'gkufro', role: 'visitor')
+    # make some generated users
+    generated_users = []
+    generated_passes = []
+    1500.times do
+        last_name = Faker::Name.last_name
+        first_name = Faker::Name.first_name
+        username = "#{first_name}_#{last_name}#{rand(9999)}"
+        user = FactoryBot.create(:user, username: username, role: 'visitor')
+        generated_users << user
+
+        # make some passes for the users
+        pass = FactoryBot.create(:park_pass, first_name: first_name, last_name: last_name, card_expiration: Date.new(Date.today.year + 1,12,31), user: user, pass_type: fun_pass)
+        generated_passes << pass
+        num_passes = rand(5)
+        num_passes.times do
+            first_name = Faker::Name.first_name
+            pass = FactoryBot.create(:park_pass, first_name: first_name, last_name: last_name, card_expiration: Date.new(Date.today.year + 1,12,31), user: user, pass_type: fun_pass)
+            generated_passes << pass
+        end
+    end
     puts("Created Users\n")
-
-
-    # Step 3: Create some pass types
-    fun_pass = FactoryBot.create(:pass_type)
-    annual_pass = FactoryBot.create(:pass_type, pass_name: 'Annual Pass', description: 'Pay each month and get great park benefits')
-    puts("Created Pass Types\n")
 
 
     # Step 4: Create some park passes
@@ -62,14 +82,28 @@ namespace :db do
     justin_visit = FactoryBot.create(:visit, park_pass: justin_fun_pass)
     ashley_visit = FactoryBot.create(:visit, park_pass: ashley_fun_pass)
     gail_visit = FactoryBot.create(:visit, park_pass: gail_fun_pass)
+
+    # generate some visits
+    generated_visits = []
+    sampled_passes = generated_passes.sample([2250, generated_passes.length].min)
+    sampled_passes.each do |pass|
+        generated_visits << FactoryBot.create(:visit, park_pass: pass)
+    end
     puts("Created Visits\n")
 
 
     # Step 6: Create some quueues
     justin_montu = FactoryBot.create(:quueue, ride: montu, visit: justin_visit, checked_in: true)
     ashley_montu = FactoryBot.create(:quueue, ride: montu, visit: ashley_visit)
-    justin_sheikra = FactoryBot.create(:quueue, ride: sheikra, visit: justin_visit)
     gail_cobras_curse = FactoryBot.create(:quueue, ride: cobras_curse, visit: gail_visit)
+    # generate some quueues
+    generated_quueues = []
+    sampled_visits = generated_visits.sample([2000, generated_visits.length].min)
+    sampled_visits.each do |visit|
+        ride = queueable_rides.sample(1).first
+        generated_quueues << FactoryBot.create(:quueue, ride: ride, visit: visit)
+    end
+    justin_sheikra = FactoryBot.create(:quueue, ride: sheikra, visit: justin_visit)
     puts("Created Quueues\n")
   end
 end
