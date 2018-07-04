@@ -9,6 +9,22 @@ Vue.component('ride-row', {
   props: {
     ride: Object
   },
+
+  mounted: function() {
+    this.finder = ('#' + this.ride.ride_name).replace(' ', '-').replace("'", '');
+    this.summary_finder = this.finder + ' div div.ride_summary'
+    this.ride_details_finder = this.finder + ' div div.ride_details';
+    console.log(this.ride_details_finder);
+    $(this.ride_details_finder).hide();
+
+    $(this.summary_finder).click({finder: this.ride_details_finder }, function(event) {
+      $(event.data.finder).toggle();
+    })
+  },
+
+  methods: {
+
+  }
 });
 
 Vue.component('current-queue-row', {
@@ -67,7 +83,6 @@ Vue.component('current-queue-row', {
       return wait_text
     },
     is_ready: function() {
-      console.log(this.park_pass.current_queue.expected_wait);
       if (this.park_pass.current_queue.expected_wait == 0) {
         return true
       } else {
