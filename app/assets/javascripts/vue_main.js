@@ -119,6 +119,7 @@ var main_area_instance = new Vue({
       users: [],
       park_passes: [],
       rides: [],
+      recent_refresh: false,
       errors: []
     },
 
@@ -134,6 +135,20 @@ var main_area_instance = new Vue({
           main_area_instance.logout();
         })
       });
+
+      $('#refresh_button').click(function() {
+        if (!main_area_instance.recent_refresh) {
+          main_area_instance.get_users();
+          main_area_instance.get_park_passes();
+          main_area_instance.get_rides();
+          main_area_instance.recent_refresh = true;
+          setTimeout(function() {
+            main_area_instance.recent_refresh = false;
+          }, 5000);
+        } else {
+          console.log("refresh too soon");
+        }
+      })
     },
 
     methods: {
