@@ -5,14 +5,18 @@
             <div class='col s3 queue_summary_wrapper'>
                 <p class='flow-text truncate'><span class='queue_wait_text' v-bind:class="{ ready_queue: park_pass.current_queue.is_ready }">{{ queue_wait_text() }} </span></p>
             </div>
-            <div class='col s7 queue_summary_wrapper'>
+            <div class='col s6 queue_summary_wrapper'>
                 <p class='flow-text truncate'>{{ queue_context_text() }}</p>
             </div>
-            <div class='col s2 queue_more_vert_wrapper'>
-                <i class="material-icons center-align valign-wrapper queue_more_vert">more_vert</i>
-            </div>
-            <div class=' queue_cancel_wrapper'>
-                <a class="waves-effect waves-light btn"><i class="material-icons">delete</i></a>
+            <div class='col s3 queue_more_vert_wrapper'>
+                <div class='row no-margin-bottom no-margin-top'>
+                    <div class='col s6'>
+                        <i class="material-icons center-align valign-wrapper queue_more_vert clickable">more_vert</i>
+                    </div>
+                    <div class='col s6'>
+                        <i class="material-icons cancel_queue_button clickable" v-on:click="cancel_queue()">delete</i>
+                    </div>
+                </div>
             </div>
         </div>
 

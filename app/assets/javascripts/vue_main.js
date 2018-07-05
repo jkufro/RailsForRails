@@ -58,17 +58,15 @@ Vue.component('current-queue-row', {
 
   mounted: function() {
     this.finder = '#' + this.park_pass.current_queue.security_code;
-    this.button_finder = this.finder + ' div div div.queue_cancel_wrapper a.btn';
+    this.cancel_icon_finder = this.finder + ' div div div.queue_more_vert_wrapper div div i.cancel_queue_button';
     this.more_vert_finder = this.finder + ' div div div.queue_more_vert_wrapper';
     this.summary_finder = this.finder + ' div div div.queue_summary_wrapper';
     this.queue_details_finder = this.finder + ' div div.queue_details'
 
-    $(this.button_finder).hide();
-    $(this.more_vert_finder).click({ finder: this.button_finder }, function(event) {
+    console.log(this.cancel_icon_finder);
+    $(this.cancel_icon_finder).hide();
+    $(this.more_vert_finder).click({ finder: this.cancel_icon_finder }, function(event) {
       $(event.data.finder).toggle();
-    });
-    $(this.button_finder).click({callback: this.cancel_queue}, function(event) {
-      event.data.callback();
     });
 
     $(this.summary_finder).click({ finder: this.queue_details_finder }, function(event) {

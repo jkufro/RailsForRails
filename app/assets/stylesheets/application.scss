@@ -38,6 +38,11 @@ $link-color: #039be5;
     font-size: 2rem;
 }
 
+.cancel_queue_button {
+    font-size: 1.85rem;
+    color: $error-color;
+}
+
 .no-margin-bottom { margin-bottom:0px !important }
 .no-margin-top { margin-top:0px !important }
 
