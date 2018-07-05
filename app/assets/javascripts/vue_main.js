@@ -63,7 +63,6 @@ Vue.component('current-queue-row', {
     this.summary_finder = this.finder + ' div div div.queue_summary_wrapper';
     this.queue_details_finder = this.finder + ' div div.queue_details'
 
-    console.log(this.cancel_icon_finder);
     $(this.cancel_icon_finder).hide();
     $(this.more_vert_finder).click({ finder: this.cancel_icon_finder }, function(event) {
       $(event.data.finder).toggle();

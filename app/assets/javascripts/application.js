@@ -16,7 +16,6 @@
 //= require materialize-sprockets
 //= require materialize-form
 //= require vue
-//= require_tree .
 
 function run_ajax(method, data, link, callback=function(res){}, err_callback=function(res){}){
   $.ajax({

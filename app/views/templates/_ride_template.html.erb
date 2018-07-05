@@ -1,15 +1,17 @@
 <script type="text/x-template" id="ride-template">
-<div class='row card no-margin-bottom no-margin-top' :id="ride.ride_name.replace(' ', '-').replace('\'', '')">
+<div class='row card no-margin-bottom no-margin-top ride_card' :id="ride.ride_name.replace(' ', '-').replace('\'', '')">
     <div class='col s12 card-content'>
-        <span class='ride_min_hieght flow-text'>{{ ride.min_height }}"</span>
-        <div class='row valign-wrapper no-margin-bottom ride_summary'>
-            <div class='col s12'>
-                <h3 class='center-align truncate'>{{ ride.ride_name }}</h3>
+        <div class='ride_card_summary'>
+            <span class='ride_min_hieght flow-text'>{{ ride.min_height }}"</span>
+            <div class='row valign-wrapper no-margin-bottom ride_summary'>
+                <div class='col s12'>
+                    <h3 class='center-align truncate'>{{ ride.ride_name }}</h3>
+                </div>
             </div>
-        </div>
-        <div class='row no-margin-bottom'>
-            <div class='col s12'>
-                <p class='center-align flow-text ride_wait'>{{ ride.expected_wait_time }} minutes</p>
+            <div class='row no-margin-bottom'>
+                <div class='col s12'>
+                    <p class='center-align flow-text ride_wait'>{{ ride.expected_wait_time }} minutes</p>
+                </div>
             </div>
         </div>
 

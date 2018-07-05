@@ -17,6 +17,14 @@
             <%= render partial: 'partials/templates' %>
             <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
             <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+            <% if !logged_in? %>
+                <%= javascript_include_tag 'vue_login', 'data-turbolinks-track': 'reload' %>
+            <% elsif is_admin? %>
+                <%= javascript_include_tag 'vue_admin', 'data-turbolinks-track': 'reload' %>
+            <% else %>
+                <%= javascript_include_tag 'vue_main', 'data-turbolinks-track': 'reload' %>
+            <% end %>
         </main>
 
         <%= render :partial => "partials/footer" %>
