@@ -1,0 +1,69 @@
+<script type="text/x-template" id="admin-ride-template">
+
+
+<div class='row card no-margin-bottom no-margin-top ride_card' :id="ride.ride_name.replace(' ', '-').replace('\'', '')">
+    <div class='col s12 card-content'>
+        <div class='ride_card_summary'>
+            <span class='ride_min_hieght flow-text'>
+                {{ ride.min_height }}"
+                <br/>
+                <i class="material-icons" v-bind:class="{ success_text: ride.active, error_text: !ride.active }">fiber_manual_record</i>
+                <br/>
+                <i class="material-icons" v-bind:class="{ ready_queue: ride.allow_queue, error_text: !ride.allow_queue }">people</i>
+                <br/>
+                {{ ride.num_not_checked_in }}
+            </span>
+
+            <span class='ride_min_hieght flow-text left'></span>
+            <div class='row valign-wrapper no-margin-bottom ride_summary'>
+                <div class='col s12'>
+                    <h3 class='center-align truncate'>{{ ride.ride_name }}</h3>
+                </div>
+            </div>
+            <div class='row no-margin-bottom'>
+                <div class='col s12'>
+                    <p class='center-align flow-text ride_wait'>{{ ride.expected_wait_time }} minutes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class='ride_details row valign-wrapper center-align no-margin-bottom'>
+            <div class='col s12'>
+                <div class='row'>
+                    <p class='flow-text queue_code_text'>{{ ride.max_allowed_queue_code }}</p>
+                </div>
+                <div class='row'>
+                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'call_queue_num', :vmodel => 'call_queue_num', :label => '', :helper_text => 'Call Queue', :row => false, :cols => 's4', :offset => 's4'} %>
+                </div>
+                <div class='row'>
+                    <div class='col s12'>
+                        <a class="waves-effect waves-light btn center">Reset Max Queue</a>
+                    </div>
+                </div>
+                <br/>
+                <div class='row'>
+                    <div class='col s12'>
+                        <h4>Edit Ride</h4>
+                    </div>
+                </div>
+
+                <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'ride_name_field', :vmodel => 'ride.ride_name', :label => '', :helper_text => 'Ride Name', :cols => 's4', :offset => 's4'} %>
+                <%= render partial: 'partials/matize_vue_textarea', locals: {:id => 'ride_description_field', :vmodel => 'ride.ride_description', :label => '', :helper_text => 'Ride Description', :type => 'textarea'} %>
+                <div class='row'>
+                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'cart_occupancy_field', :vmodel => 'ride.cart_occupancy', :helper_text => 'Cart Occupancy', :label => '', :type => 'number', :cols => 's2', :row => false} %>
+                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'carts_on_track_field', :vmodel => 'ride.carts_on_track', :helper_text => 'Carts On Track', :label => '', :type => 'number', :cols => 's2', :offset => 's0', :row => false} %>
+                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'min_height_field', :vmodel => 'ride.min_height', :helper_text => 'Min Height', :label => '', :type => 'number', :cols => 's2', :offset => 's0', :row => false} %>
+                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'ride_duration_field', :vmodel => 'ride.ride_duration', :helper_text => 'Ride Duration', :label => '', :type => 'number', :cols => 's2', :offset => 's0', :row => false} %>
+                </div>
+
+                <div class='row'>
+                    <%= render partial: 'partials/matize_vue_checkbox', locals: {:id => 'allow_queue_field', :vmodel => 'ride.allow_queue', :label => 'Allow Queue', :cols => 's2', :offset => 's4', :row => false} %>
+                    <%= render partial: 'partials/matize_vue_checkbox', locals: {:id => 'active_field', :vmodel => 'ride.active', :label => 'Active', :cols => 's2', :offset => 's0', :row => false} %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+

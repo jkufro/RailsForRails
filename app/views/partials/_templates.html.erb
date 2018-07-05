@@ -1,2 +1,6 @@
+<% if is_admin? %>
+<%= render partial: 'templates/admin_ride_template' %>
+<% elsif logged_in? %>
 <%= render partial: 'templates/ride_template' %>
 <%= render partial: 'templates/current_queue_template' %>
+<% end %>

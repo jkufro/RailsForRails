@@ -1,0 +1,23 @@
+<% label ||= vmodel %>
+<% cols ||= 's8' %>
+<% offset ||= 's2' %>
+<% if !defined?(row) %>
+<% row = true %>
+<% end %>
+
+<% if row == true %>
+<div class='row'>
+<% end %>
+
+    <div class='col <%= cols %> offset-<%= offset %>'>
+        <p>
+          <label>
+            <input type="checkbox" class="filled-in" v-model="<%= vmodel %>">
+            <span><%= label %></span>
+          </label>
+        </p>
+    </div>
+
+<% if row == true %>
+</div>
+<% end %>

@@ -1,4 +1,36 @@
+//////////////////////////////////////////
+////***         Components         ***////
+//////////////////////////////////////////
+Vue.component('admin-ride-row', {
+  // Defining where to look for the HTML template in the index view
+  template: '#admin-ride-template',
 
+  // Passed elements to the component from the Vue instance
+  props: {
+    ride: Object
+  },
+
+  data: function() {
+    return {
+        call_queue_num: 0,
+    }
+  },
+
+  mounted: function() {
+    this.finder = ('#' + this.ride.ride_name).replace(' ', '-').replace("'", '');
+    this.summary_finder = this.finder + ' div div.ride_summary'
+    this.ride_details_finder = this.finder + ' div div.ride_details';
+    $(this.ride_details_finder).hide();
+
+    $(this.summary_finder).click({finder: this.ride_details_finder }, function(event) {
+      $(event.data.finder).toggle();
+    })
+  },
+
+  methods: {
+
+  }
+});
 
 //////////////////////////////////////////
 ////***   The Vue instance itself  ***////
@@ -8,8 +40,6 @@ var admin_area_instance = new Vue({
     el: '#admin_area',
 
     data: {
-      users: [],
-      park_passes: [],
       rides: [],
       recent_refresh: false,
       errors: []
@@ -21,7 +51,9 @@ var admin_area_instance = new Vue({
       $( document ).ready(function() {
         $('#logout_button').click(function() {
           admin_area_instance.logout();
-        })
+        });
+
+        admin_area_instance.get_all();
       });
 
       $('#refresh_button').click(function() {
@@ -42,7 +74,16 @@ var admin_area_instance = new Vue({
 
     methods: {
       get_all: function() {
-
+        this.get_rides();
+      },
+      get_rides: function() {
+        run_ajax('GET', {}, '/rides/index', this.set_rides, this.get_rides_failure);
+      },
+      set_rides: function(res) {
+        this.rides = res;
+      },
+      get_rides_failure(res) {
+        this.rides = [];
       },
       logout: function() {
         run_ajax('GET', {}, '/logout', this.logout_success);

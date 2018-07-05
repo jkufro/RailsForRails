@@ -24,8 +24,12 @@ $link-color: #039be5;
 
 @import "materialize";
 
-.error-text {
+.error_text {
   color: $error-color;
+}
+
+.success_text {
+    color: $success-color;
 }
 
 .clickable {

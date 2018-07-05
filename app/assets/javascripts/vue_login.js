@@ -3,7 +3,7 @@
 //////////////////////////////////////////
 Vue.component('login_signup_error_row', {
   // Defining where to look for the HTML template in the index view
-  template: '<div class="center error-text">{{ error }}</div>',
+  template: '<div class="center error_text">{{ error }}</div>',
 
   // Passed elements to the component from the Vue instance
   props: {

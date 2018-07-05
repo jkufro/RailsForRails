@@ -3,23 +3,21 @@
 <% cols ||= 's8' %>
 <% offset ||= 's2' %>
 <% helper_text ||= '' %>
-<% if !defined?(row) %>
-<% row = true %>
-<% end %>
+<% row ||= true %>
 
-<% if row == true %>
+<% if row %>
 <div class='row'>
 <% end %>
 
     <div class='col <%= cols %> offset-<%= offset %>'>
         <div class="input-field ">
-            <input id="<%= id %>" type="<%= type %>" v-model="<%= vmodel %>">
+            <textarea id="<%= id %>" class="materialize-textarea" v-model="<%= vmodel %>"></textarea>
             <label for="<%= id %>"><%= label %></label>
             <span class="helper-text" data-error="wrong" data-success="right"><%= helper_text %></span>
         </div>
     </div>
 
 
-<% if row == true %>
+<% if row %>
 </div>
 <% end %>
