@@ -1,4 +1,4 @@
-<h4 class='center-align'>Your Queues</h4>
+<h4 class='center-align' v-if="has_queues()">Your Queues</h4>
 <div is='current-queue-row'
     v-for="park_pass in park_passes"
     v-if="park_pass.current_queue"

@@ -152,6 +152,15 @@ var main_area_instance = new Vue({
     },
 
     methods: {
+      has_queues: function() {
+        for (var i = 0; i < this.park_passes.length; i++) {
+          this_pass = this.park_passes[i]
+          if (this_pass.current_queue) {
+            return true;
+          }
+          return false;
+        }
+      },
       get_rides: function() {
         run_ajax('GET', {}, '/rides/index', this.set_rides, this.get_rides_failure);
       },
