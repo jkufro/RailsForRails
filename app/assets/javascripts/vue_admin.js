@@ -28,7 +28,15 @@ Vue.component('admin-ride-row', {
   },
 
   methods: {
+    update_ride: function() {
 
+    },
+    update_ride_success: function() {
+
+    },
+    update_ride_failure: function() {
+
+    },
   }
 });
 
