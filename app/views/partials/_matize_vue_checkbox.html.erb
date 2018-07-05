@@ -11,10 +11,8 @@
 
     <div class='col <%= cols %> offset-<%= offset %>'>
         <p>
-          <label>
-            <input type="checkbox" class="filled-in" v-model="<%= vmodel %>">
-            <span><%= label %></span>
-          </label>
+          <input id="<%= id %>" type="checkbox" class="filled-in" v-model="<%= vmodel %>">
+          <label for="<%= id %>"><%= label %></label>
         </p>
     </div>
 
