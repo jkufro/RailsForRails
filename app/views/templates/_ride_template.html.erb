@@ -1,8 +1,6 @@
 <script type="text/x-template" id="ride-template">
 <div class='row card  no-margin-top ride_card' :id="'ride-' + ride.id">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img src="https://coasterbuzz.com/CoasterPhoto/CoasterPhotoImage/2417">
-    </div>
+    <%= render partial: 'rides/ride_image_for_card' %>
     <div class='col s12 card-content'>
         <div class='ride_card_summary'>
             <span class='ride_min_hieght flow-text'>{{ ride.min_height }}"</span>

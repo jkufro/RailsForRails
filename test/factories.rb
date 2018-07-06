@@ -25,6 +25,7 @@ FactoryBot.define do
 
   factory :ride do
     ride_name 'Montu'
+    ride_image_url 'placeholder'
     carts_on_track 2
     cart_occupancy 28
     ride_duration 180

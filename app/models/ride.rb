@@ -18,7 +18,7 @@ class Ride < ApplicationRecord
   # ----------- #
   # validations #
   # ----------- #
-  validates_presence_of :ride_name, :carts_on_track, :ride_duration, :cart_occupancy, :max_allowed_queue_code, :min_height
+  validates_presence_of :ride_name, :ride_image_url, :carts_on_track, :ride_duration, :cart_occupancy, :max_allowed_queue_code, :min_height
   validates_format_of :max_allowed_queue_code, with: /\A[A-Z]{4}\z/, message: "must be four upper case letters"
   validates_numericality_of :carts_on_track, :greater_than_or_equal_to => 0, :only_integer => true
   validates_numericality_of :ride_duration, :greater_than => 0, :only_integer => true

@@ -99,6 +99,7 @@ Vue.component('admin-ride-row', {
                 max_allowed_queue_code: this.ride.max_allowed_queue_code,
                 min_height: this.ride.min_height,
                 allow_queue: this.ride.allow_queue,
+                ride_image_url: this.ride.ride_image_url,
                 active: this.ride.active
             }
         }

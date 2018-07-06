@@ -23,14 +23,23 @@ namespace :db do
     kumba_desc = "Legendary steel coaster that roars! Named for the distant roar of the king of the jungle, see why this legendary roller coaster still reigns on so many lists of favorites. After the thrill of an initial 135 foot drop, you will plunge into a diving loop, feel a full 3 seconds of absolute weightlessness while spiraling 360 degrees!"
     scorpion_desc = "360-degree vertical loop, upside down! The Scorpion® is one of only three roller coasters of its kind remaining in the world today, yet its sting is every bit as effective at instilling thrills through every twist and turn. Scorpion pulls you through a 360 degree loop and speeds of 50 miles per hour!"
 
-    montu = FactoryBot.create(:ride, ride_description: montu_desc)
-    sheikra = FactoryBot.create(:ride, ride_name: 'SheiKra', carts_on_track: 3, cart_occupancy: 24, ride_duration: 140, ride_description: sheikra_desc)
-    cobras_curse = FactoryBot.create(:ride, ride_name: "Cobra's Curse", carts_on_track: 8, cart_occupancy: 4, ride_duration: 180, ride_description: cobras_curse_desc, min_height: 48)
-    cheetah_hunt = FactoryBot.create(:ride, ride_name: 'Cheetah Hunt', carts_on_track: 5, cart_occupancy: 16, ride_duration: 210, ride_description: cheetah_hunt_desc, min_height: 48)
-    sand_serpent = FactoryBot.create(:ride, ride_name: 'Sand Serpent', carts_on_track: 5, cart_occupancy: 4, ride_duration: 120, ride_description: sand_serpent_desc, min_height: 48)
-    kumba = FactoryBot.create(:ride, ride_name: 'Kumba', carts_on_track: 3, cart_occupancy: 16, ride_duration: 174, ride_description: kumba_desc)
-    scorpion = FactoryBot.create(:ride, ride_name: 'Scorpion', carts_on_track: 1, cart_occupancy: 16, ride_duration: 60, ride_description: scorpion_desc, min_height: 48, allow_queue: false)
-    gwazi = FactoryBot.create(:ride, ride_name: 'Gwazi', carts_on_track: 4, cart_occupancy: 24, ride_duration: 150, ride_description: 'Permanently closed wooden coaster.', min_height: 48, allow_queue: false, active: false)
+    montu_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fmontu%2F2017_buschgardenstampabay_rollercoasters_montu4_750x422.ashx%3Fversion%3D1_201704175933&w=750'
+    sheikra_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fsheikra%2F2017_buschgardenstampabay_rollercoasters_sheikra4_mediamodule_750x422.ashx%3Fversion%3D1_201704174842&w=750'
+    cobras_curse_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fcobras-curse%2F2017_buschgardenstampabay_rollercoasters_cobrascurse8_750x422.ashx%3Fversion%3D1_201704141748&w=750'
+    cheetah_hunt_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fcheetah-hunt%2F2017_buschgardenstampabay_rollercoasters_cheetahhunt3_750x422.ashx%3Fversion%3D1_201704174136&w=750'
+    sand_serpent_image = 'http://www.coastergallery.com/2000/Wild_Mouse_Hersheypark-5.jpg'
+    kumba_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F740x442%2Frides%2Fkumba%2F2017_buschgardenstampabay_rollercoasters_kumba6_740x442.ashx%3Fversion%3D1_201705261916&w=750'
+    scorpion_image = 'https://coasterbuzz.com/CoasterPhoto/CoasterPhotoImage/3097'
+    gwazi_image = 'http://www.tampabay.com/storyimage/HI/20141223/ARTICLE/312239608/EP/1/1/EP-312239608.jpg?cachebuster=851339'
+
+    montu = FactoryBot.create(:ride, ride_description: montu_desc, ride_image_url: montu_image)
+    sheikra = FactoryBot.create(:ride, ride_image_url: sheikra_image, ride_name: 'SheiKra', carts_on_track: 3, cart_occupancy: 24, ride_duration: 140, ride_description: sheikra_desc)
+    cobras_curse = FactoryBot.create(:ride, ride_image_url: cobras_curse_image, ride_name: "Cobra's Curse", carts_on_track: 8, cart_occupancy: 4, ride_duration: 180, ride_description: cobras_curse_desc, min_height: 48)
+    cheetah_hunt = FactoryBot.create(:ride, ride_image_url: cheetah_hunt_image, ride_name: 'Cheetah Hunt', carts_on_track: 5, cart_occupancy: 16, ride_duration: 210, ride_description: cheetah_hunt_desc, min_height: 48)
+    sand_serpent = FactoryBot.create(:ride, ride_image_url: sand_serpent_image, ride_name: 'Sand Serpent', carts_on_track: 5, cart_occupancy: 4, ride_duration: 120, ride_description: sand_serpent_desc, min_height: 48)
+    kumba = FactoryBot.create(:ride, ride_image_url: kumba_image, ride_name: 'Kumba', carts_on_track: 3, cart_occupancy: 16, ride_duration: 174, ride_description: kumba_desc)
+    scorpion = FactoryBot.create(:ride, ride_image_url: scorpion_image, ride_name: 'Scorpion', carts_on_track: 1, cart_occupancy: 16, ride_duration: 60, ride_description: scorpion_desc, min_height: 48, allow_queue: false)
+    gwazi = FactoryBot.create(:ride, ride_image_url: gwazi_image, ride_name: 'Gwazi', carts_on_track: 4, cart_occupancy: 24, ride_duration: 150, ride_description: 'Permanently closed wooden coaster.', min_height: 48, allow_queue: false, active: false)
     queueable_rides = [montu, sheikra, cobras_curse, cheetah_hunt, sand_serpent, kumba]
     puts("Created Rides\n")
 

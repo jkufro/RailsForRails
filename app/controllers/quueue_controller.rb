@@ -6,7 +6,7 @@ class QuueueController < ApplicationController
     visit_id = Visit.find_by_park_pass_id(params['park_pass_id']).id
     @quueue = Quueue.new({ride_id: ride_id, visit_id: visit_id})
     if @quueue.save
-      render json: { message: "Queue Created" }, status: :ok
+      render json: { message: "Got In Line" }, status: :ok
     else
       render json: { message: "Could Not Create Queue", errors: @quueue.errors.full_messages }, status: :unprocessable_entity
     end
@@ -14,7 +14,7 @@ class QuueueController < ApplicationController
 
   def cancel
     if @quueue.delete
-      render json: { message: "Queue Cancelled" }, status: :ok
+      render json: { message: "Got Out Of Line" }, status: :ok
     else
       render json: { message: "Could Not Cancel Queue", errors: @quueue.errors.full_messages }, status: :unprocessable_entity
     end

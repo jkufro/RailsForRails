@@ -1,10 +1,8 @@
 <script type="text/x-template" id="admin-ride-template">
 
 
-<div class='row card no-margin-bottom no-margin-top ride_card' :id="'ride-' + ride.id">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img src="https://coasterbuzz.com/CoasterPhoto/CoasterPhotoImage/2417">
-    </div>
+<div class='row card no-margin-top ride_card' :id="'ride-' + ride.id">
+    <%= render partial: 'rides/ride_image_for_card' %>
     <div class='col s12 card-content'>
         <div class='ride_card_summary'>
             <span class='ride_min_hieght flow-text'>
@@ -101,6 +99,8 @@
                     <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'min_height_field', :vmodel => 'ride.min_height', :helper_text => 'Min Height', :label => '', :type => 'number', :cols => 's2', :offset => 's0', :row => false} %>
                     <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'ride_duration_field', :vmodel => 'ride.ride_duration', :helper_text => 'Ride Duration', :label => '', :type => 'number', :cols => 's2', :offset => 's0', :row => false} %>
                 </div>
+
+                <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'ride_image_url_field', :vmodel => 'ride.ride_image_url', :label => '', :helper_text => 'Ride Image URL'} %>
 
                 <div class='row'>
                     <%= render partial: 'partials/matize_vue_checkbox', locals: {:id => 'allow_queue_field', :vmodel => 'ride.allow_queue', :label => 'Allow Queue', :cols => 's3', :offset => 's3', :row => false} %>

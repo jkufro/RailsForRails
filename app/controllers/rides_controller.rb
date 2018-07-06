@@ -95,6 +95,6 @@ class RidesController < ApplicationController
     end
 
     def ride_params
-      params.require(:ride).permit(:ride_name, :carts_on_track, :ride_duration, :ride_description, :min_height, :cart_occupancy, :max_allowed_queue_code, :allow_queue, :active)
+      params.require(:ride).permit(:ride_name, :ride_image_url, :carts_on_track, :ride_duration, :ride_description, :min_height, :cart_occupancy, :max_allowed_queue_code, :allow_queue, :active)
     end
 end
