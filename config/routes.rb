@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get 'rides/index' => 'rides#index'
   get 'rides/:id' => 'rides#show'
   post 'rides/create' => 'rides#create'
-  patch 'rides/udpate/:id' => 'rides#update'
-  put 'rides/udpate/:id' => 'rides#update'
+  patch 'rides/:id/update' => 'rides#update'
+  put 'rides/:id/update' => 'rides#update'
   delete 'rides/:id' => 'rides#destroy'
   get 'rides/:id/call/:num_guests_to_call' => 'rides#call_queue'
 

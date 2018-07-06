@@ -47,6 +47,10 @@
                     </div>
                 </div>
 
+                <div class='row'>
+                    <%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'ride_error_row' } %>
+                </div>
+
                 <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'ride_name_field', :vmodel => 'ride.ride_name', :label => '', :helper_text => 'Ride Name', :cols => 's4', :offset => 's4'} %>
                 <%= render partial: 'partials/matize_vue_textarea', locals: {:id => 'ride_description_field', :vmodel => 'ride.ride_description', :label => '', :helper_text => 'Ride Description', :type => 'textarea'} %>
                 <div class='row'>
@@ -63,7 +67,7 @@
 
                 <div class='row'>
                     <div class='col s12'>
-                        <a class="waves-effect waves-light btn center" v-on:click="s()">Update Ride</a>
+                        <a class="waves-effect waves-light btn center" v-on:click="update_ride()">Update Ride</a>
                     </div>
                 </div>
             </div>
