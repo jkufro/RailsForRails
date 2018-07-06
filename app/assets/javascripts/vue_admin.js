@@ -36,8 +36,9 @@ Vue.component('admin-ride-row', {
     this.ride_details_finder = this.finder + ' div div.ride_details';
     this.ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
     $(this.ride_details_finder).hide();
+    this.image_finder = this.finder + ' div.card-image'
 
-    this.init_summary_toggle(this.summary_finder, this.ride_details_finder);
+    this.init_summary_toggle(this.summary_finder + ',' + this.image_finder, this.ride_details_finder);
 
     this.get_security_codes();
   },
@@ -67,9 +68,9 @@ Vue.component('admin-ride-row', {
     check_in_rider: function() {
         choice = this.check_in_choice
         if (choice == '' || choice == null) {
-            choice = 'null'
+            choice = 'null';
         }
-        path = '/rides/' + this.ride.id + '/check_in/' + choice
+        path = '/rides/' + this.ride.id + '/check_in/' + choice;
         run_ajax('GET', {}, path, this.check_in_rider_success, this.check_in_rider_failure);
     },
     check_in_rider_success: function(res) {

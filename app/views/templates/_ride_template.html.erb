@@ -1,5 +1,8 @@
 <script type="text/x-template" id="ride-template">
-<div class='row card no-margin-bottom no-margin-top ride_card' :id="ride.ride_name.replace(' ', '-').replace('\'', '')">
+<div class='row card  no-margin-top ride_card' :id="'ride-' + ride.id">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img src="https://coasterbuzz.com/CoasterPhoto/CoasterPhotoImage/2417">
+    </div>
     <div class='col s12 card-content'>
         <div class='ride_card_summary'>
             <span class='ride_min_hieght flow-text'>{{ ride.min_height }}"</span>

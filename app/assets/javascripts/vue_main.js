@@ -12,14 +12,15 @@ Vue.component('ride-row', {
   },
 
   mounted: function() {
-    this.finder = ('#' + this.ride.ride_name).replace(' ', '-').replace("'", '');
-    this.summary_finder = this.finder + ' div div.ride_summary'
-    this.ride_details_finder = this.finder + ' div div.ride_details';
+    this.finder = ('#ride-' + this.ride.id);
+    this.image_finder = this.finder + ' div.card-image'
+    this.summary_finder = this.finder + ' div.card-content div.ride_summary'
+    this.ride_details_finder = this.finder + ' div.card-content div.ride_details';
     $(this.ride_details_finder).hide();
 
-    $(this.summary_finder).click({finder: this.ride_details_finder }, function(event) {
+    $(this.summary_finder + ',' + this.image_finder).click({finder: this.ride_details_finder }, function(event) {
       $(event.data.finder).toggle();
-    })
+    });
   },
 
   methods: {
