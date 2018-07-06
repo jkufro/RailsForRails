@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_action :set_ride, only: [:show, :update, :destroy, :call_queue]
+  before_action :set_ride, only: [:show, :update, :destroy, :call_queue, :reset_queue]
 
   def index
     @rides = Ride.all.alphabetical
@@ -17,6 +17,15 @@ class RidesController < ApplicationController
       render json: { message: "Ride Created" }, status: :ok
     else
       render json: { message: "Could Not Create Ride", errors: @ride.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def reset_queue
+    @ride.max_allowed_queue_code = "AAAA"
+    if @ride.save
+      render json: { message: "Ride Queue Reset" }, status: :ok
+    else
+      render json: { message: "Could Not Reset Ride Queue", errors: @ride.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

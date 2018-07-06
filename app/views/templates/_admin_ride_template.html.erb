@@ -33,14 +33,26 @@
                     <p class='flow-text queue_code_text'>{{ ride.max_allowed_queue_code }}</p>
                 </div>
                 <div class='row'>
-                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'call_queue_num', :vmodel => 'call_queue_num', :label => '', :helper_text => 'Call Queue', :row => false, :cols => 's4', :offset => 's4'} %>
+                    <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'call_queue_num', :vmodel => 'call_queue_num', :label => '', :helper_text => '', :row => false, :cols => 's4', :offset => 's4'} %>
                 </div>
                 <div class='row'>
                     <div class='col s12'>
-                        <a class="waves-effect waves-light btn center">Reset Max Queue</a>
+                        <a class="waves-effect waves-light btn center" v-on:click="call_queue()">Call Queue</a>
                     </div>
                 </div>
+
                 <br/>
+                <br/>
+
+                <div class='row'>
+                    <div class='col s12'>
+                        <a class="waves-effect waves-light btn center" v-on:click="reset_queue()">Reset Max Queue</a>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+
                 <div class='row'>
                     <div class='col s12'>
                         <h4>Edit Ride</h4>

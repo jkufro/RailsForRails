@@ -10,7 +10,7 @@ class RideSerializer < ActiveModel::Serializer
   end
 
   def num_not_checked_in
-    object.quueues.are_not_checked_in.length
+    object.quueues.today.are_not_checked_in.length
   end
 
   def expected_wait_time

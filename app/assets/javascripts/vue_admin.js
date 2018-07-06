@@ -56,7 +56,6 @@ Vue.component('admin-ride-row', {
                 active: this.ride.active
             }
         }
-        console.log()
         run_ajax('PATCH', ride_data, path, this.update_ride_success, this.update_ride_failure);
     },
     update_ride_success: function(res) {
@@ -68,6 +67,31 @@ Vue.component('admin-ride-row', {
         Materialize.toast(res.responseJSON.message, 1000);
         this.errors = res.responseJSON.errors
     },
+    reset_queue: function() {
+        path = '/rides/' + this.ride.id + '/reset_queue'
+        run_ajax('GET', {}, path, this.reset_queue_success, this.reset_queue_failure);
+    },
+    reset_queue_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        admin_area_instance.get_rides();
+    },
+    reset_queue_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        admin_area_instance.get_rides();
+    },
+    call_queue: function() {
+        path = '/rides/' + this.ride.id + '/call/' + this.call_queue_num
+        run_ajax('GET', {}, path, this.call_queue_success, this.call_queue_failure);
+    },
+    call_queue_success: function(res) {
+        this.call_queue_num = 0
+        Materialize.toast(res.message, 1000);
+        admin_area_instance.get_rides();
+    },
+    call_queue_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        admin_area_instance.get_rides();
+    }
   }
 });
 

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   put 'rides/:id/update' => 'rides#update'
   delete 'rides/:id' => 'rides#destroy'
   get 'rides/:id/call/:num_guests_to_call' => 'rides#call_queue'
+  get 'rides/:id/reset_queue' => 'rides#reset_queue'
 
   # park passes controller
   get 'park_passes/index' => 'park_passes#index'
