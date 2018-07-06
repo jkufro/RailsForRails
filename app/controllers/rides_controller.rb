@@ -2,7 +2,7 @@ class RidesController < ApplicationController
   before_action :set_ride, only: [:show, :update, :destroy, :call_queue, :reset_queue, :clear_queue, :ready_security_codes, :check_in]
 
   def index
-    @rides = Ride.all.alphabetical
+    @rides = Ride.all
     @rides = @rides.allow_queue unless is_admin?
     render json: @rides
   end
@@ -30,7 +30,9 @@ class RidesController < ApplicationController
     if queue.save
       render json: { message: "Rider Checked In" }, status: :ok
     else
-      render json: { message: "Could Not Check In Rider", errors: queue.errors.full_messages }, status: :unprocessable_entity
+      msg = "Could Not Check In Rider"
+      msg = "Rider Not Ready To Check In Yet" unless queue.is_ready?
+      render json: { message: msg, errors: queue.errors.full_messages }, status: :unprocessable_entity
     end
 
   end

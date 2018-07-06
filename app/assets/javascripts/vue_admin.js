@@ -31,20 +31,23 @@ Vue.component('admin-ride-row', {
   },
 
   mounted: function() {
-    this.finder = ('#' + this.ride.ride_name).replace(' ', '-').replace("'", '');
+    this.finder = '#ride-' + this.ride.id;
     this.summary_finder = this.finder + ' div div.ride_summary'
     this.ride_details_finder = this.finder + ' div div.ride_details';
     this.ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
     $(this.ride_details_finder).hide();
 
-    $(this.summary_finder).click({finder: this.ride_details_finder }, function(event) {
-      $(event.data.finder).toggle();
-    });
+    this.init_summary_toggle(this.summary_finder, this.ride_details_finder);
 
     this.get_security_codes();
   },
 
   methods: {
+    init_summary_toggle: function(summary_finder, ride_details_finder) {
+        $(summary_finder).click({finder: ride_details_finder }, function(event) {
+            $(event.data.finder).toggle();
+        });
+    },
     update_vue_checkin_autocomplete: function() {
         ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
         val = $(ride_queues_autocomplete_finder).val();
@@ -56,11 +59,6 @@ Vue.component('admin-ride-row', {
     },
     set_security_codes: function(res) {
         finder = '#ride_' + this.ride.id + '_queues_autocomplete';
-        if (this.ride.id == 3) {
-            console.log(finder);
-            console.log(res)
-        }
-
         $(finder).autocomplete({
           onAutocomplete: this.update_vue_checkin_autocomplete,
           data: res,
@@ -76,12 +74,12 @@ Vue.component('admin-ride-row', {
     },
     check_in_rider_success: function(res) {
         Materialize.toast(res.message, 1000);
-        this.check_in_choice = ''
+        this.check_in_choice = '';
         this.get_security_codes();
+        this.ride.num_not_checked_in -= 1;
     },
     check_in_rider_failure: function (res) {
         Materialize.toast(res.responseJSON.message, 1000);
-        console.log(res.responseJSON.errors)
         this.get_security_codes();
     },
     get_security_codes_failure: function(res) {

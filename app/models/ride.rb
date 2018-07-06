@@ -66,7 +66,7 @@ class Ride < ApplicationRecord
 
   def expected_wait_time(queue_code=nil)
     if queue_code.nil?
-      number_in_line = self.unready_queues.length
+      number_in_line = self.quueues.today.are_not_checked_in.length
       # accurately report empty lines
       return 0 if number_in_line <= 0
     else
