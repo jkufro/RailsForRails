@@ -11,10 +11,16 @@ Vue.component('ride-row', {
     park_passes: Array
   },
 
+  data: function() {
+    return {
+      details_open: false,
+    }
+  },
+
   mounted: function() {
     this.finder = ('#ride-' + this.ride.id);
     this.image_finder = this.finder + ' div.card-image'
-    this.summary_finder = this.finder + ' div.card-content div.ride_summary'
+    this.summary_finder = this.finder + ' div.card-content div.ride_card_summary'
     this.ride_details_finder = this.finder + ' div.card-content div.ride_details';
     $(this.ride_details_finder).hide();
 
@@ -27,6 +33,9 @@ Vue.component('ride-row', {
     create_queue: function(pass_id) {
       path = '/queues/' + this.ride.id + '/create/' + pass_id
       run_ajax('GET', {}, path, this.create_queue_success, this.create_queue_failure);
+    },
+    flip_expand_icon: function() {
+        this.details_open = ! this.details_open;
     },
     create_queue_success: function(res) {
       Materialize.toast(res.message, 1000);

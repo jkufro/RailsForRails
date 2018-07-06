@@ -1,0 +1,11 @@
+<span class='ride_min_hieght flow-text'>
+    {{ ride.min_height }}"
+    <% if is_admin? %>
+    <br/>
+    <i class="material-icons" v-bind:class="{ success_text: ride.active, error_text: !ride.active }">fiber_manual_record</i>
+    <br/>
+    <i class="material-icons" v-bind:class="{ ready_queue: ride.allow_queue, error_text: !ride.allow_queue }">people</i>
+    <br/>
+    {{ ride.num_not_checked_in }}
+    <% end %>
+</span>

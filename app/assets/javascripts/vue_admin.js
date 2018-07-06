@@ -26,13 +26,14 @@ Vue.component('admin-ride-row', {
         call_queue_num: 0,
         check_in_choice: '',
         check_in_autocomplete_instance: null,
+        details_open: false,
         errors: []
     }
   },
 
   mounted: function() {
     this.finder = '#ride-' + this.ride.id;
-    this.summary_finder = this.finder + ' div div.ride_summary'
+    this.summary_finder = this.finder + ' div div.ride_card_summary'
     this.ride_details_finder = this.finder + ' div div.ride_details';
     this.ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
     $(this.ride_details_finder).hide();
@@ -45,9 +46,12 @@ Vue.component('admin-ride-row', {
 
   methods: {
     init_summary_toggle: function(summary_finder, ride_details_finder) {
-        $(summary_finder).click({finder: ride_details_finder }, function(event) {
+        $(summary_finder).click({finder: ride_details_finder, obj: this}, function(event) {
             $(event.data.finder).toggle();
         });
+    },
+    flip_expand_icon: function() {
+        this.details_open = ! this.details_open;
     },
     update_vue_checkin_autocomplete: function() {
         ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
