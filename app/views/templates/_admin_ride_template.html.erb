@@ -32,7 +32,7 @@
                 <div class='row'>
                     <p class='flow-text queue_code_text'>{{ ride.max_allowed_queue_code }}</p>
                 </div>
-                <div class='row no-margin-bottom'>
+                <div class='row no-margin-bottom' v-on:keyup.enter="call_queue()">
                     <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'call_queue_num', :vmodel => 'call_queue_num', :label => '', :helper_text => '', :row => false, :cols => 's4', :offset => 's4'} %>
                 </div>
                 <div class='row'>
@@ -65,7 +65,7 @@
                         <div class="row no-margin-bottom">
                             <div class="input-field col s6 offset-s3">
                                 <i class="material-icons prefix">person</i>
-                                <input type="text" :id="'ride_' + ride.id + '_queues_autocomplete'" class="autocomplete" v-model="check_in_choice">
+                                <input type="text" :id="'ride_' + ride.id + '_queues_autocomplete'" class="autocomplete" v-model="check_in_choice" v-on:keyup.enter="check_in_rider()">
                                 <label for="autocomplete-input">Rider Security Code</label>
                             </div>
                         </div>
