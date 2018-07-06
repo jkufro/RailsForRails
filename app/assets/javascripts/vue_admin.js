@@ -24,6 +24,8 @@ Vue.component('admin-ride-row', {
   data: function() {
     return {
         call_queue_num: 0,
+        check_in_choice: '',
+        check_in_autocomplete_instance: null,
         errors: []
     }
   },
@@ -32,14 +34,59 @@ Vue.component('admin-ride-row', {
     this.finder = ('#' + this.ride.ride_name).replace(' ', '-').replace("'", '');
     this.summary_finder = this.finder + ' div div.ride_summary'
     this.ride_details_finder = this.finder + ' div div.ride_details';
+    this.ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
     $(this.ride_details_finder).hide();
 
     $(this.summary_finder).click({finder: this.ride_details_finder }, function(event) {
       $(event.data.finder).toggle();
-    })
+    });
+
+    this.get_security_codes();
   },
 
   methods: {
+    update_vue_checkin_autocomplete: function() {
+        ride_queues_autocomplete_finder = '#ride_' + this.ride.id + '_queues_autocomplete';
+        val = $(ride_queues_autocomplete_finder).val();
+        this.check_in_choice = val;
+    },
+    get_security_codes: function() {
+        path = '/rides/' + this.ride.id + '/ready_security_codes'
+        run_ajax('GET', {}, path, this.set_security_codes, this.get_security_codes_failure);
+    },
+    set_security_codes: function(res) {
+        finder = '#ride_' + this.ride.id + '_queues_autocomplete';
+        if (this.ride.id == 3) {
+            console.log(finder);
+            console.log(res)
+        }
+
+        $(finder).autocomplete({
+          onAutocomplete: this.update_vue_checkin_autocomplete,
+          data: res,
+        });
+    },
+    check_in_rider: function() {
+        choice = this.check_in_choice
+        if (choice == '' || choice == null) {
+            choice = 'null'
+        }
+        path = '/rides/' + this.ride.id + '/check_in/' + choice
+        run_ajax('GET', {}, path, this.check_in_rider_success, this.check_in_rider_failure);
+    },
+    check_in_rider_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        this.check_in_choice = ''
+        this.get_security_codes();
+    },
+    check_in_rider_failure: function (res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        console.log(res.responseJSON.errors)
+        this.get_security_codes();
+    },
+    get_security_codes_failure: function(res) {
+        Materialize.toast("Failed To Update Check In Security Codes", 2000);
+    },
     update_ride: function() {
         path = '/rides/' + this.ride.id + '/update'
         ride_data = {

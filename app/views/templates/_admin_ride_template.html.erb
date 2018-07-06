@@ -32,7 +32,7 @@
                 <div class='row'>
                     <p class='flow-text queue_code_text'>{{ ride.max_allowed_queue_code }}</p>
                 </div>
-                <div class='row'>
+                <div class='row no-margin-bottom'>
                     <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'call_queue_num', :vmodel => 'call_queue_num', :label => '', :helper_text => '', :row => false, :cols => 's4', :offset => 's4'} %>
                 </div>
                 <div class='row'>
@@ -50,8 +50,6 @@
                     </div>
                 </div>
 
-                <br/>
-                <br/>
 
                 <div class='row'>
                     <div class='col s12'>
@@ -62,7 +60,27 @@
                 <br/>
                 <br/>
 
-                <div class='row'>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row no-margin-bottom">
+                            <div class="input-field col s6 offset-s3">
+                                <i class="material-icons prefix">person</i>
+                                <input type="text" :id="'ride_' + ride.id + '_queues_autocomplete'" class="autocomplete" v-model="check_in_choice">
+                                <label for="autocomplete-input">Rider Security Code</label>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col s12'>
+                                <a class="waves-effect waves-light btn center" v-on:click="check_in_rider()">Check In</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+
+                <div class='row no-margin-bottom'>
                     <div class='col s12'>
                         <h4>Edit Ride</h4>
                     </div>

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get 'rides/:id/call/:num_guests_to_call' => 'rides#call_queue'
   get 'rides/:id/reset_queue' => 'rides#reset_queue'
   get 'rides/:id/clear_queue' => 'rides#clear_queue'
+  get 'rides/:id/ready_security_codes' => 'rides#ready_security_codes'
+  get 'rides/:id/check_in/:security_code' => 'rides#check_in'
 
   # park passes controller
   get 'park_passes/index' => 'park_passes#index'
