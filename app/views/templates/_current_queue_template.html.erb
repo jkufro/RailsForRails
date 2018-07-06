@@ -1,7 +1,7 @@
 <script type="text/x-template" id="current-queue-template">
 <div class='row card no-margin-bottom no-margin-top' :id="park_pass.current_queue.security_code">
     <div class='col s12 card-content'>
-        <div class='row valign-wrapper left-align no-margin-bottom'>
+        <div class='row valign-wrapper left-align no-margin-bottom clickable'>
             <div class='col s3 queue_summary_wrapper'>
                 <p class='flow-text truncate'><span class='queue_wait_text' v-bind:class="{ ready_queue: park_pass.current_queue.is_ready }">{{ queue_wait_text() }} </span></p>
             </div>
