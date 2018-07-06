@@ -66,6 +66,12 @@ Vue.component('current-queue-row', {
     park_pass: Object
   },
 
+  data: function() {
+    return {
+      delete_open: false,
+    }
+  },
+
   mounted: function() {
     this.finder = '#' + this.park_pass.current_queue.security_code;
     this.cancel_icon_finder = this.finder + ' div div div.queue_more_vert_wrapper div div i.cancel_queue_button';
@@ -86,6 +92,9 @@ Vue.component('current-queue-row', {
   },
 
   methods: {
+    toggle_delete_open: function() {
+      this.delete_open = !this.delete_open
+    },
     cancel_queue: function() {
       path = '/queues/' + this.park_pass.current_queue.id + '/cancel'
       run_ajax('GET', {}, path, this.cancel_queue_success, this.cancel_queue_failure);
