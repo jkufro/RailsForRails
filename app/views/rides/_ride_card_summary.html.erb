@@ -1,0 +1,10 @@
+<div class='ride_card_summary' v-on:click="flip_expand_icon()">
+    <%= render partial: 'rides/ride_quick_info' %>
+
+    <%= render partial: 'rides/ride_name_row' %>
+
+    <div class='row no-margin-bottom'>
+        <%= render partial: 'rides/ride_details_expander_icons' %>
+        <%= render partial: 'rides/ride_expected_wait_time' %>
+    </div>
+</div>

@@ -1,19 +1,8 @@
 <script type="text/x-template" id="admin-ride-template">
-
-
 <div class='row card no-margin-top ride_card' :id="'ride-' + ride.id">
     <%= render partial: 'rides/ride_image_for_card' %>
     <div class='col s12 card-content'>
-        <div class='ride_card_summary' v-on:click="flip_expand_icon()">
-            <%= render partial: 'rides/ride_quick_info' %>
-
-            <%= render partial: 'rides/ride_name_row' %>
-
-            <div class='row no-margin-bottom'>
-                <%= render partial: 'rides/ride_details_expander_icons' %>
-                <%= render partial: 'rides/ride_expected_wait_time' %>
-            </div>
-        </div>
+        <%= render partial: 'rides/ride_card_summary' %>
 
         <div class='ride_details row valign-wrapper center-align no-margin-bottom'>
             <div class='col s12'>
@@ -37,6 +26,11 @@
                 <br/>
 
                 <%= render partial: 'rides/edit_ride_form' %>
+
+                <br/>
+                <br/>
+
+                <%= render partial: 'rides/delete_ride_row' %>
             </div>
         </div>
     </div>

@@ -11,6 +11,72 @@ Vue.component('ride_error_row', {
   },
 });
 
+Vue.component('new-ride-card', {
+  // Defining where to look for the HTML template in the index view
+  template: '#new-ride-card-template',
+
+  data: function() {
+    return {
+        details_open: false,
+        ride: {
+            ride_name: '',
+            ride_description: '',
+            carts_on_track: 0,
+            ride_duration: 0,
+            cart_occupancy: 0,
+            max_allowed_queue_code: 'AAAA',
+            min_height: 0,
+            allow_queue: true,
+            ride_image_url: '',
+            active: true
+        },
+        errors: []
+    }
+  },
+
+  mounted: function() {
+    console.log("mounted")
+    $('#new_ride_form_area').hide();
+
+    $('#new_ride_title_area').click(function() {
+        $('#new_ride_form_area').toggle();
+    });
+  },
+
+  methods: {
+    create_ride: function() {
+        path = '/rides/create'
+        ride_data = {
+            ride: this.ride
+        }
+        run_ajax('POST', ride_data, path, this.create_ride_success, this.create_ride_failure);
+    },
+    create_ride_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        admin_area_instance.get_rides();
+        this.errors = []
+        this.ride = {
+            ride_name: '',
+            ride_description: '',
+            carts_on_track: 0,
+            ride_duration: 0,
+            cart_occupancy: 0,
+            max_allowed_queue_code: 'AAAA',
+            min_height: 0,
+            allow_queue: true,
+            ride_image_url: '',
+            active: true
+        }
+    },
+    create_ride_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        this.errors = res.responseJSON.errors;
+    }
+
+  }
+});
+
+
 
 Vue.component('admin-ride-row', {
   // Defining where to look for the HTML template in the index view
@@ -144,6 +210,18 @@ Vue.component('admin-ride-row', {
         admin_area_instance.get_rides();
     },
     call_queue_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        admin_area_instance.get_rides();
+    },
+    delete_ride: function() {
+        path = '/rides/' + this.ride.id
+        run_ajax('DELETE', {}, path, this.delete_ride_success, this.delete_ride_failure);
+    },
+    delete_ride_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        admin_area_instance.get_rides();
+    },
+    delete_ride_failure: function(res) {
         Materialize.toast(res.responseJSON.message, 1000);
         admin_area_instance.get_rides();
     }

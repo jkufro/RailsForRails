@@ -1,0 +1,17 @@
+<script type="text/x-template" id="new-ride-card-template">
+<div class='row card no-margin-top' id="new_ride_card">
+    <div class='col s12 card-content'>
+        <div class='row valign-wrapper no-margin-bottom no-margin-top' id="new_ride_title_area">
+            <div class='col s12'>
+                <h3 class='center-align truncate no-margin-bottom no-margin-top clickable'><i class="material-icons">add_box</i>&nbsp;New Ride</h3>
+            </div>
+        </div>
+
+        <div class='row valign-wrapper center-align no-margin-bottom' id="new_ride_form_area">
+            <div class='col s12'>
+                <%= render partial: 'rides/new_ride_form' %>
+            </div>
+        </div>
+    </div>
+</div>
+</script>

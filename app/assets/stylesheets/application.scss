@@ -24,6 +24,10 @@ $link-color: #039be5;
 
 @import "materialize";
 
+.error_color_background {
+    background-color: $error-color;
+}
+
 .error_text {
   color: $error-color;
 }
