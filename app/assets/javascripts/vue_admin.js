@@ -79,6 +79,10 @@ Vue.component('admin-ride-row', {
         Materialize.toast(res.responseJSON.message, 1000);
         admin_area_instance.get_rides();
     },
+    clear_queue: function() {
+        path = '/rides/' + this.ride.id + '/clear_queue'
+        run_ajax('GET', {}, path, this.reset_queue_success, this.reset_queue_failure);
+    },
     call_queue: function() {
         path = '/rides/' + this.ride.id + '/call/' + this.call_queue_num
         run_ajax('GET', {}, path, this.call_queue_success, this.call_queue_failure);

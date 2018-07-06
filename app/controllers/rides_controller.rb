@@ -1,5 +1,5 @@
 class RidesController < ApplicationController
-  before_action :set_ride, only: [:show, :update, :destroy, :call_queue, :reset_queue]
+  before_action :set_ride, only: [:show, :update, :destroy, :call_queue, :reset_queue, :clear_queue]
 
   def index
     @rides = Ride.all.alphabetical
@@ -26,6 +26,14 @@ class RidesController < ApplicationController
       render json: { message: "Ride Queue Reset" }, status: :ok
     else
       render json: { message: "Could Not Reset Ride Queue", errors: @ride.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def clear_queue
+    if @ride.quueues.today.are_not_checked_in.destroy_all
+      render json: { message: "Ride Queue Cleared" }, status: :ok
+    else
+      render json: { message: "Could Not Clear Ride Queue", errors: @ride.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
