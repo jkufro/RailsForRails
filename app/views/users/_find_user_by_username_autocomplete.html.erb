@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col s12">
+        <div class="row no-margin-bottom">
+            <div class="input-field col s6 offset-s3">
+                <input type="text" :id="autocomplete_username" class="autocomplete" v-model="autocomplete_username" v-on:keyup.enter="get_user()">
+                <label for="autocomplete-input">Username</label>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col s12'>
+                <a class="waves-effect waves-light btn center" v-on:click="get_user()">
+                    <i class="material-icons left">search</i>
+                    Find User
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

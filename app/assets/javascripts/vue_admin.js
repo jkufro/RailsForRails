@@ -11,6 +11,156 @@ Vue.component('ride_error_row', {
   },
 });
 
+
+Vue.component('existing-user-card', {
+  // Defining where to look for the HTML template in the index view
+  template: '#existing-user-card-template',
+
+  data: function() {
+    return {
+        found_user: false,
+        details_open: false,
+        autocomplete_username: '',
+        id: 0,
+        username: '',
+        email: '',
+        phone: '',
+        password: '',
+        password_confirmation: '',
+        role: '',
+        active: true,
+        errors: []
+    }
+  },
+
+  mounted: function() {
+    $('#existing_user_details').hide();
+
+    $('#existing_user_title_area').click(function() {
+        $('#existing_user_details').toggle();
+    });
+  },
+
+  methods: {
+    get_usernames: function() {
+        path = "users/usernames"
+        run_ajax('GET', {}, path, this.get_usernames_success, this.get_usernames_failure);
+    },
+    get_usernames_success: function(res) {
+        finder = '#existing_user_autocomplete';
+        $(finder).autocomplete({
+          onAutocomplete: this.update_vue_username_autocomplete,
+          data: res,
+        });
+    },
+    update_vue_username_autocomplete: function() {
+        finder = '#existing_user_autocomplete';
+        val = $(ride_queues_autocomplete_finder).val();
+        this.autocomplete_username = val;
+    },
+    get_usernames_failure: function(res) {
+        Materialize.toast("Failed To Retrieve Usernames", 1000);
+    },
+    update_user: function() {
+        path = '/users/' + this.id + '/update'
+        this.role = $('#user_role').val();
+        user_data = {
+            user: {
+                username: this.username,
+                email: this.email,
+                phone: this.phone,
+                password: this.password,
+                password_confirmation: this.password_confirmation,
+                role: this.role,
+                active: this.active
+            }
+        }
+        run_ajax('POST', user_data, path, this.create_user_success, this.create_user_failure);
+    },
+    update_user_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        this.username = '';
+        this.email = '';
+        this.phone = '';
+        this.password = '';
+        this.password_confirmation = '';
+        this.role = '';
+        this.active = true;
+        this.errors = [];
+        this.found_user = false;
+    },
+    update_user_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        this.errors = res.responseJSON.errors;
+    }
+
+  }
+});
+
+
+Vue.component('new-user-card', {
+  // Defining where to look for the HTML template in the index view
+  template: '#new-user-card-template',
+
+  data: function() {
+    return {
+        details_open: false,
+        username: '',
+        email: '',
+        phone: '',
+        password: '',
+        password_confirmation: '',
+        role: '',
+        active: true,
+        errors: []
+    }
+  },
+
+  mounted: function() {
+    $('#new_user_form_area').hide();
+
+    $('#new_user_title_area').click(function() {
+        $('#new_user_form_area').toggle();
+    });
+  },
+
+  methods: {
+    create_user: function() {
+        path = '/users/create'
+        this.role = $('#new_user_role').val()
+        user_data = {
+            user: {
+                username: this.username,
+                email: this.email,
+                phone: this.phone,
+                password: this.password,
+                password_confirmation: this.password_confirmation,
+                role: this.role,
+                active: this.active
+            }
+        }
+        run_ajax('POST', user_data, path, this.create_user_success, this.create_user_failure);
+    },
+    create_user_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        this.username = '';
+        this.email = '';
+        this.phone = '';
+        this.password = '';
+        this.password_confirmation = '';
+        this.role = '';
+        this.active = true;
+        this.errors = [];
+    },
+    create_user_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        this.errors = res.responseJSON.errors;
+    }
+
+  }
+});
+
+
 Vue.component('new-ride-card', {
   // Defining where to look for the HTML template in the index view
   template: '#new-ride-card-template',

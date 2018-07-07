@@ -1,0 +1,23 @@
+<% id_prefix ||= '' %>
+
+<%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'ride_error_row' } %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_user_username', :vmodel => 'username'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_user_email', :vmodel => 'email'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_user_phone', :vmodel => 'phone'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_user_password', :vmodel => 'password', :type => 'password'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_user_password_confirmation', :vmodel => 'password_confirmation', :type => 'password'} %>
+
+<% if is_admin? %>
+    <div class='row'>
+        <div class="input-field col s4 offset-s2">
+            <select v-model="role" id="<%= id_prefix %>_user_role">
+              <option value="" disabled selected></option>
+              <option value="admin">Admin</option>
+              <option value="visitor">Visitor</option>
+            </select>
+            <label>Role</label>
+        </div>
+
+        <%= render partial: 'partials/matize_vue_checkbox', locals: {:id => id_prefix + '_user_active', :vmodel => 'active', :label => 'Active', :cols => 's4', :offset => 's0', :row => false} %>
+    </div>
+<% end %>

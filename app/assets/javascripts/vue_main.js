@@ -149,7 +149,7 @@ var main_area_instance = new Vue({
 
         $('#logout_button').click(function() {
           main_area_instance.logout();
-        })
+        });
       });
 
       $('#refresh_button').click(function() {

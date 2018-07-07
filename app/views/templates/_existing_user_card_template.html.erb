@@ -1,0 +1,31 @@
+<script type="text/x-template" id="existing-user-card-template">
+<div class='row card no-margin-top' id="existing_user_card">
+    <div class='col s12 card-content'>
+        <div class='row valign-wrapper no-margin-bottom no-margin-top' id="existing_user_title_area">
+            <div class='col s12'>
+                <h3 class='center-align truncate no-margin-bottom no-margin-top clickable'>
+                    <i class="material-icons">person</i>
+                    &nbsp;
+                    Users
+                </h3>
+            </div>
+        </div>
+
+        <div class="row" id="existing_user_details">
+            <div class="col s12">
+                <div class='row valign-wrapper center-align no-margin-bottom' id="existing_user_autocomplete_area">
+                    <div class='col s12'>
+                        <%= render partial: 'users/find_user_by_username_autocomplete' %>
+                    </div>
+                </div>
+
+                <div class='row valign-wrapper center-align no-margin-bottom' id="existing_user_form_area" v-if="found_user">
+                    <div class='col s12'>
+                        <%= render partial: 'users/existing_user_form' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>

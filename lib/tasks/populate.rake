@@ -27,7 +27,7 @@ namespace :db do
     sheikra_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fsheikra%2F2017_buschgardenstampabay_rollercoasters_sheikra4_mediamodule_750x422.ashx%3Fversion%3D1_201704174842&w=750'
     cobras_curse_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fcobras-curse%2F2017_buschgardenstampabay_rollercoasters_cobrascurse8_750x422.ashx%3Fversion%3D1_201704141748&w=750'
     cheetah_hunt_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F750x422%2Frides%2Fcheetah-hunt%2F2017_buschgardenstampabay_rollercoasters_cheetahhunt3_750x422.ashx%3Fversion%3D1_201704174136&w=750'
-    sand_serpent_image = 'http://www.coastergallery.com/2000/Wild_Mouse_Hersheypark-5.jpg'
+    sand_serpent_image = 'https://i.ytimg.com/vi/3QJbv5BD6x8/maxresdefault.jpg'
     kumba_image = 'https://buschgardens.com/handlers/ImageResizer.ashx?path=https%3A%2F%2Fseaworld.scdn3.secure.raxcdn.com%2Ftampa%2F-%2Fmedia%2Fbusch-gardens-tampa%2Fmedia-modules%2F740x442%2Frides%2Fkumba%2F2017_buschgardenstampabay_rollercoasters_kumba6_740x442.ashx%3Fversion%3D1_201705261916&w=750'
     scorpion_image = 'https://coasterbuzz.com/CoasterPhoto/CoasterPhotoImage/3097'
     gwazi_image = 'http://www.tampabay.com/storyimage/HI/20141223/ARTICLE/312239608/EP/1/1/EP-312239608.jpg?cachebuster=851339'

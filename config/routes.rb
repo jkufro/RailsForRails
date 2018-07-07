@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get 'users/index' => 'users#index'
   get 'users/:id' => 'users#show'
   post 'users/create' => 'users#create'
-  patch 'users/udpate/:id' => 'users#update'
-  put 'users/udpate/:id' => 'users#update'
+  patch 'users/:id/update' => 'users#update'
+  put 'users/:id/update' => 'users#update'
   delete 'users/:id' => 'users#destroy'
 
   # rides controller

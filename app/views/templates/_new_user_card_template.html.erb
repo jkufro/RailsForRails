@@ -1,0 +1,21 @@
+<script type="text/x-template" id="new-user-card-template">
+<div class='row card no-margin-top' id="new_user_card">
+    <div class='col s12 card-content'>
+        <div class='row valign-wrapper no-margin-bottom no-margin-top' id="new_user_title_area">
+            <div class='col s12'>
+                <h3 class='center-align truncate no-margin-bottom no-margin-top clickable'>
+                    <i class="material-icons">add_box</i>
+                    &nbsp;
+                    New User
+                </h3>
+            </div>
+        </div>
+
+        <div class='row valign-wrapper center-align no-margin-bottom' id="new_user_form_area">
+            <div class='col s12'>
+                <%= render partial: 'users/new_user_form' %>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
