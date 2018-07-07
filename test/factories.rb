@@ -4,7 +4,7 @@ FactoryBot.define do
     first_name "Justin"
     last_name "Kufro"
     card_number { [*'A'..'Z'].sample + rand(10 ** 15).to_s.rjust(15,'0') }
-    card_expiration 1.year.from_now
+    card_expiration nil
     height 58
     association :user
     association :pass_type

@@ -1,0 +1,8 @@
+<% id_prefix ||= '' %>
+
+<%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'ride_error_row' } %>
+
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_first_name', :vmodel => 'first_name'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_last_name', :vmodel => 'last_name'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_card_number', :vmodel => 'card_number'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_height', :vmodel => 'height', :type => 'number'} %>

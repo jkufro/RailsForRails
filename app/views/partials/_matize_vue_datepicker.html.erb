@@ -1,0 +1,26 @@
+<% label ||= vmodel %>
+<% cols ||= 's8' %>
+<% offset ||= 's2' %>
+<% helper_text ||= '' %>
+<% if !defined?(row) %>
+    <% row = true %>
+<% end %>
+
+<% if row == true %>
+<div class='row'>
+<% end %>
+
+    <div class='col <%= cols %> offset-<%= offset %>'>
+        <div class="input-field ">
+            <input id="<%= id %>" type="text" class="datepicker" v-model='<%= vmodel %>'>
+            <label for="<%= id %>"><%= label %></label>
+            <span class="helper-text" data-error="wrong" data-success="right"><%= helper_text %></span>
+        </div>
+    </div>
+
+
+<% if row == true %>
+</div>
+<% end %>
+
+

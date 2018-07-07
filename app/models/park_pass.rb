@@ -26,6 +26,7 @@ class ParkPass < ApplicationRecord
   # --------- #
   # callbacks #
   # --------- #
+  before_validation :set_expiration
 
 
   # ---------------- #
@@ -67,5 +68,12 @@ class ParkPass < ApplicationRecord
   # private functions #
   # ----------------- #
   private
+  def set_expiration
+    unless self.user.nil?
+      if self.card_expiration.nil?
+        self.card_expiration = 1.year.from_now
+      end
+    end
+  end
 
 end
