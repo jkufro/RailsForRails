@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :park_pass do
     first_name "Justin"
     last_name "Kufro"
-    card_number ''
+    card_number { [*'A'..'Z'].sample + rand(10 ** 15).to_s.rjust(15,'0') }
     card_expiration 1.year.from_now
     height 58
     association :user

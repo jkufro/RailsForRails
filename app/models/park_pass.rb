@@ -26,7 +26,6 @@ class ParkPass < ApplicationRecord
   # --------- #
   # callbacks #
   # --------- #
-  before_validation :create_card_number
 
 
   # ---------------- #
@@ -68,11 +67,5 @@ class ParkPass < ApplicationRecord
   # private functions #
   # ----------------- #
   private
-  def create_card_number
-    unless self.user.nil?
-      if self.card_number.nil? || self.card_number == ''
-        self.card_number = [*'A'..'Z'].sample + rand(10 ** 15).to_s.rjust(15,'0')
-      end
-    end
-  end
+
 end

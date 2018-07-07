@@ -74,6 +74,10 @@ Vue.component('existing-user-card', {
         this.password_confirmation = '';
         this.role = res.role;
         this.active = res.active;
+
+        setTimeout(function() {
+            Materialize.updateTextFields();
+        }, 200);
     },
     get_user_failure: function(res) {
         Materialize.toast(res.responseJSON.message, 1000);
@@ -261,7 +265,6 @@ Vue.component('new-ride-card', {
 
   }
 });
-
 
 
 Vue.component('admin-ride-row', {
