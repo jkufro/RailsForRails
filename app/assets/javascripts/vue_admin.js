@@ -112,12 +112,25 @@ Vue.component('existing-user-card', {
         this.active = true;
         this.errors = [];
         this.found_user = false;
+        this.get_usernames();
     },
     update_user_failure: function(res) {
         Materialize.toast(res.responseJSON.message, 1000);
         this.errors = res.responseJSON.errors;
+    },
+    delete_user: function() {
+        path = 'users/' + this.id
+        run_ajax('DELETE', {}, path, this.delete_user_success, this.delete_user_failure);
+    },
+    delete_user_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        this.found_user = false;
+        this.get_usernames();
+    },
+    delete_user_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        this.errors = res.responseJSON.errors;
     }
-
   }
 });
 

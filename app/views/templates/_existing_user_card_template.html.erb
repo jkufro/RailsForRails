@@ -21,7 +21,12 @@
 
                 <div class='row valign-wrapper center-align no-margin-bottom' id="existing_user_form_area" v-if="found_user">
                     <div class='col s12'>
-                        <%= render partial: 'users/existing_user_form' %>
+                        <div class='row'>
+                            <div class='col s12'>
+                                <%= render partial: 'users/existing_user_form' %>
+                            </div>
+                        </div>
+                        <%= render partial: 'users/delete_user_row' %>
                     </div>
                 </div>
             </div>
