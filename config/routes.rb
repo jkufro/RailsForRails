@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   # users controller
   get 'users/index' => 'users#index'
-  get 'users/:id' => 'users#show'
+  get 'users/:id/show' => 'users#show'
+  get 'users/show_by_username/:username' => 'users#show_by_username'
+  get 'users/usernames' => 'users#usernames'
   post 'users/create' => 'users#create'
   patch 'users/:id/update' => 'users#update'
   put 'users/:id/update' => 'users#update'

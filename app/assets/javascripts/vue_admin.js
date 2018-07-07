@@ -39,6 +39,8 @@ Vue.component('existing-user-card', {
     $('#existing_user_title_area').click(function() {
         $('#existing_user_details').toggle();
     });
+
+    this.get_usernames();
   },
 
   methods: {
@@ -47,15 +49,37 @@ Vue.component('existing-user-card', {
         run_ajax('GET', {}, path, this.get_usernames_success, this.get_usernames_failure);
     },
     get_usernames_success: function(res) {
-        finder = '#existing_user_autocomplete';
+        finder = '#autocomplete_username';
         $(finder).autocomplete({
           onAutocomplete: this.update_vue_username_autocomplete,
           data: res,
         });
     },
+    get_user: function() {
+        un = this.autocomplete_username;
+        if (un == '' || un == null) {
+            un = 'l';
+        }
+        path = 'users/show_by_username/' + un
+        run_ajax('GET', {}, path, this.get_user_success, this.get_user_failure);
+    },
+    get_user_success: function(res) {
+        this.found_user = true;
+
+        this.id = res.id;
+        this.username = res.username;
+        this.email = res.email;
+        this.phone = res.phone;
+        this.password = '';
+        this.password_confirmation = '';
+        this.role = res.role;
+        this.active = res.active;
+    },
+    get_user_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+    },
     update_vue_username_autocomplete: function() {
-        finder = '#existing_user_autocomplete';
-        val = $(ride_queues_autocomplete_finder).val();
+        val = $('#autocomplete_username').val();
         this.autocomplete_username = val;
     },
     get_usernames_failure: function(res) {
@@ -63,7 +87,7 @@ Vue.component('existing-user-card', {
     },
     update_user: function() {
         path = '/users/' + this.id + '/update'
-        this.role = $('#user_role').val();
+        this.role = $('#existing_user_role').val();
         user_data = {
             user: {
                 username: this.username,
@@ -75,7 +99,7 @@ Vue.component('existing-user-card', {
                 active: this.active
             }
         }
-        run_ajax('POST', user_data, path, this.create_user_success, this.create_user_failure);
+        run_ajax('PATCH', user_data, path, this.update_user_success, this.update_user_failure);
     },
     update_user_success: function(res) {
         Materialize.toast(res.message, 1000);
@@ -185,7 +209,6 @@ Vue.component('new-ride-card', {
   },
 
   mounted: function() {
-    console.log("mounted")
     $('#new_ride_form_area').hide();
 
     $('#new_ride_title_area').click(function() {

@@ -34,7 +34,6 @@ class RidesController < ApplicationController
       msg = "Rider Not Ready To Check In Yet" unless queue.is_ready?
       render json: { message: msg, errors: queue.errors.full_messages }, status: :unprocessable_entity
     end
-
   end
 
   def create

@@ -14,6 +14,16 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def show_by_username
+    @user = User.find_by_username(params[:username])
+    if @user.nil?
+      render json: { message: "Could Not Find User", errors: [] }, status: :unprocessable_entity
+      return
+    end
+
+    render json: @user
+  end
+
   def create
     pms = user_params
     unless is_admin?
@@ -43,6 +53,15 @@ class UsersController < ApplicationController
     else
       render json: { message: "Could Not Remove User", errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def usernames
+    ready_codes = User.all.alphabetical.select("username")
+    json_usernames = Hash.new()
+    ready_codes.each do |user|
+      json_usernames[user.username] = nil
+    end
+    render json: json_usernames, status: :ok
   end
 
   private
