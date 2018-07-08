@@ -2,7 +2,18 @@
 
 <%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'ride_error_row' } %>
 
-<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_first_name', :vmodel => 'first_name'} %>
-<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_last_name', :vmodel => 'last_name'} %>
-<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_card_number', :vmodel => 'card_number'} %>
-<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_park_pass_height', :vmodel => 'height', :type => 'number'} %>
+<div class='row'>
+    <div class="input-field col s8 offset-s2">
+        <select v-model="pass_type_id" id="<%= id_prefix %>_new_park_pass_pass_type_id">
+          <option value="" disabled selected></option>
+          <option value="1">Fun Pass</option>
+          <option value="2">Annual Pass</option>
+        </select>
+        <label>Pass Type</label>
+    </div>
+</div>
+
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_new_park_pass_first_name', :vmodel => 'first_name'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_new_park_pass_last_name', :vmodel => 'last_name'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_new_park_pass_card_number', :vmodel => 'card_number'} %>
+<%= render partial: 'partials/matize_vue_form_element', locals: {:id => id_prefix + '_new_park_pass_height', :vmodel => 'height', :type => 'number'} %>

@@ -70,9 +70,7 @@ class ParkPass < ApplicationRecord
   private
   def set_expiration
     unless self.user.nil?
-      if self.card_expiration.nil?
-        self.card_expiration = 1.year.from_now
-      end
+      self.card_expiration = 1.year.from_now
     end
   end
 

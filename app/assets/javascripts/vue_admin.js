@@ -12,6 +12,60 @@ Vue.component('ride_error_row', {
 });
 
 
+Vue.component('existing-user-new-park-pass', {
+  // Defining where to look for the HTML template in the index view
+  template: '#existing-user-new-park-pass-template',
+
+  data: function() {
+    return {
+        pass_type_id: '',
+        first_name: '',
+        last_name: '',
+        card_number: '',
+        height: 0,
+        errors: []
+    }
+  },
+
+  props: {
+    user_id: Number,
+  },
+
+  mounted: function() {
+
+  },
+
+  methods: {
+    create_park_pass: function() {
+        path = '/park_passes/create'
+        this.pass_type_id = $('#existing_user_new_park_pass_pass_type_id').val();
+        pass_data = {
+            park_pass: {
+                user_id: this.user_id,
+                pass_type_id: this.pass_type_id,
+                first_name: this.first_name,
+                last_name: this.last_name,
+                card_number: this.card_number,
+                height: this.height,
+            }
+        }
+        run_ajax('POST', pass_data, path, this.create_park_pass_success, this.create_park_pass_failure);
+    },
+    create_park_pass_success: function(res) {
+        Materialize.toast(res.message, 1000);
+        this.first_name = '';
+        this.last_name = '';
+        this.card_number = '';
+        this.height = 0;
+    },
+    create_park_pass_failure: function(res) {
+        Materialize.toast(res.responseJSON.message, 1000);
+        this.errors = res.responseJSON.errors;
+    }
+  }
+});
+
+
 Vue.component('existing-user-card', {
   // Defining where to look for the HTML template in the index view
   template: '#existing-user-card-template',
