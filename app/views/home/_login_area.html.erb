@@ -1,6 +1,6 @@
 <div id='login_area' class='row'>
     <h4 class="center">Login</h4>
-    <%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'login_signup_error_row' } %>
+    <%= render partial: 'partials/vue_error_rows', locals: {:is_component => 'error_row' } %>
     <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'login_username', :vmodel => 'username', :label => 'email or username'} %>
     <%= render partial: 'partials/matize_vue_form_element', locals: {:id => 'login_password', :vmodel => 'password', :type => 'password'} %>
     <div class='center-align'>

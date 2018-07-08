@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706192606) do
+ActiveRecord::Schema.define(version: 20180708231430) do
 
   create_table "park_passes", force: :cascade do |t|
     t.integer "user_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180706192606) do
     t.integer "ride_id"
     t.integer "visit_id"
     t.string "queue_code"
-    t.boolean "checked_in"
+    t.boolean "checked_in", default: false
     t.string "security_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

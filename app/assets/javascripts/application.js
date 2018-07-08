@@ -17,6 +17,12 @@
 //= require materialize-form
 //= require vue
 
+
+$( document ).ready(function() {
+
+});
+
+
 function run_ajax(method, data, link, callback=function(res){}, err_callback=function(res){}){
   $.ajax({
     method: method,
@@ -24,17 +30,20 @@ function run_ajax(method, data, link, callback=function(res){}, err_callback=fun
     url: link,
     success: function(res) {
       console.log(res);
+      try_to_toast_message(res)
       callback(res);
       return true;
     },
     error: function(res) {
       console.log("error");
       console.log(res);
+      try_to_toast_message(res)
       err_callback(res);
       return false;
     }
   })
 }
+
 
 function get_eligible_passes(all_passes) {
   // get the park passes that can enter a new queue
@@ -49,6 +58,30 @@ function get_eligible_passes(all_passes) {
 }
 
 
-$( document ).ready(function() {
+function try_to_toast_message(res) {
+  if (res.message) {
+    Materialize.toast(res.message, 1000);
+  }
+  if (res.responseJSON && res.responseJSON.message) {
+    Materialize.toast(res.responseJSON.message, 1000);
+  }
+}
 
+
+function set_errors(res) {
+  this.errors = res.responseJSON.errors;
+}
+
+
+//////////////////////////////////////////
+////***         Components         ***////
+//////////////////////////////////////////
+Vue.component('error_row', {
+  // Defining where to look for the HTML template in the index view
+  template: '<div class="center error_text">{{ error }}</div>',
+
+  // Passed elements to the component from the Vue instance
+  props: {
+    error: String
+  },
 });

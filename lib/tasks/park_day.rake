@@ -10,7 +10,7 @@ namespace :db do
 
     # Step 1: Generate some visits
     generated_visits = []
-    passes = ParkPass.all
+    passes = ParkPass.all.non_expired
     sampled_passes = passes.sample([2250, passes.length].min)
     sampled_passes.each do |pass|
         generated_visits << FactoryBot.create(:visit, park_pass: pass)

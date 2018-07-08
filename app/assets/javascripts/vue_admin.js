@@ -1,16 +1,6 @@
 //////////////////////////////////////////
 ////***         Components         ***////
 //////////////////////////////////////////
-Vue.component('ride_error_row', {
-  // Defining where to look for the HTML template in the index view
-  template: '<div class="center error_text">{{ error }}</div>',
-
-  // Passed elements to the component from the Vue instance
-  props: {
-    error: String
-  },
-});
-
 
 Vue.component('existing-user-new-park-pass', {
   // Defining where to look for the HTML template in the index view
@@ -49,19 +39,15 @@ Vue.component('existing-user-new-park-pass', {
                 height: this.height,
             }
         }
-        run_ajax('POST', pass_data, path, this.create_park_pass_success, this.create_park_pass_failure);
+        run_ajax('POST', pass_data, path, this.create_park_pass_success, this.set_errors);
     },
     create_park_pass_success: function(res) {
-        Materialize.toast(res.message, 1000);
         this.first_name = '';
         this.last_name = '';
         this.card_number = '';
         this.height = 0;
     },
-    create_park_pass_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.errors = res.responseJSON.errors;
-    }
+    set_errors: set_errors
   }
 });
 
@@ -100,7 +86,7 @@ Vue.component('existing-user-card', {
   methods: {
     get_usernames: function() {
         path = "users/usernames"
-        run_ajax('GET', {}, path, this.get_usernames_success, this.get_usernames_failure);
+        run_ajax('GET', {}, path, this.get_usernames_success);
     },
     get_usernames_success: function(res) {
         finder = '#autocomplete_username';
@@ -115,7 +101,7 @@ Vue.component('existing-user-card', {
             un = 'l';
         }
         path = 'users/show_by_username/' + un
-        run_ajax('GET', {}, path, this.get_user_success, this.get_user_failure);
+        run_ajax('GET', {}, path, this.get_user_success);
     },
     get_user_success: function(res) {
         this.found_user = true;
@@ -130,18 +116,14 @@ Vue.component('existing-user-card', {
         this.active = res.active;
 
         setTimeout(function() {
+            // gets the autofilled text spaces to move
+            // the helper text out of the way
             Materialize.updateTextFields();
         }, 200);
-    },
-    get_user_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
     },
     update_vue_username_autocomplete: function() {
         val = $('#autocomplete_username').val();
         this.autocomplete_username = val;
-    },
-    get_usernames_failure: function(res) {
-        Materialize.toast("Failed To Retrieve Usernames", 1000);
     },
     update_user: function() {
         path = '/users/' + this.id + '/update'
@@ -157,10 +139,9 @@ Vue.component('existing-user-card', {
                 active: this.active
             }
         }
-        run_ajax('PATCH', user_data, path, this.update_user_success, this.update_user_failure);
+        run_ajax('PATCH', user_data, path, this.update_user_success, this.set_errors);
     },
     update_user_success: function(res) {
-        Materialize.toast(res.message, 1000);
         this.username = '';
         this.email = '';
         this.phone = '';
@@ -172,23 +153,15 @@ Vue.component('existing-user-card', {
         this.found_user = false;
         this.get_usernames();
     },
-    update_user_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.errors = res.responseJSON.errors;
-    },
     delete_user: function() {
         path = 'users/' + this.id
-        run_ajax('DELETE', {}, path, this.delete_user_success, this.delete_user_failure);
+        run_ajax('DELETE', {}, path, this.delete_user_success, this.set_errors);
     },
     delete_user_success: function(res) {
-        Materialize.toast(res.message, 1000);
         this.found_user = false;
         this.get_usernames();
     },
-    delete_user_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.errors = res.responseJSON.errors;
-    }
+    set_errors: set_errors,
   }
 });
 
@@ -234,10 +207,9 @@ Vue.component('new-user-card', {
                 active: this.active
             }
         }
-        run_ajax('POST', user_data, path, this.create_user_success, this.create_user_failure);
+        run_ajax('POST', user_data, path, this.create_user_success, this.set_errors);
     },
     create_user_success: function(res) {
-        Materialize.toast(res.message, 1000);
         this.username = '';
         this.email = '';
         this.phone = '';
@@ -247,10 +219,7 @@ Vue.component('new-user-card', {
         this.active = true;
         this.errors = [];
     },
-    create_user_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.errors = res.responseJSON.errors;
-    }
+    set_errors: set_errors,
 
   }
 });
@@ -293,10 +262,9 @@ Vue.component('new-ride-card', {
         ride_data = {
             ride: this.ride
         }
-        run_ajax('POST', ride_data, path, this.create_ride_success, this.create_ride_failure);
+        run_ajax('POST', ride_data, path, this.create_ride_success, this.set_errors);
     },
     create_ride_success: function(res) {
-        Materialize.toast(res.message, 1000);
         admin_area_instance.get_rides();
         this.errors = []
         this.ride = {
@@ -312,10 +280,7 @@ Vue.component('new-ride-card', {
             active: true
         }
     },
-    create_ride_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.errors = res.responseJSON.errors;
-    }
+    set_errors: set_errors
 
   }
 });
@@ -369,7 +334,7 @@ Vue.component('admin-ride-row', {
     },
     get_security_codes: function() {
         path = '/rides/' + this.ride.id + '/ready_security_codes'
-        run_ajax('GET', {}, path, this.set_security_codes, this.get_security_codes_failure);
+        run_ajax('GET', {}, path, this.set_security_codes);
     },
     set_security_codes: function(res) {
         finder = '#ride_' + this.ride.id + '_queues_autocomplete';
@@ -384,20 +349,12 @@ Vue.component('admin-ride-row', {
             choice = 'null';
         }
         path = '/rides/' + this.ride.id + '/check_in/' + choice;
-        run_ajax('GET', {}, path, this.check_in_rider_success, this.check_in_rider_failure);
+        run_ajax('GET', {}, path, this.check_in_rider_success, this.get_security_codes);
     },
     check_in_rider_success: function(res) {
-        Materialize.toast(res.message, 1000);
         this.check_in_choice = '';
         this.get_security_codes();
         this.ride.num_not_checked_in -= 1;
-    },
-    check_in_rider_failure: function (res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.get_security_codes();
-    },
-    get_security_codes_failure: function(res) {
-        Materialize.toast("Failed To Update Check In Security Codes", 2000);
     },
     update_ride: function() {
         path = '/rides/' + this.ride.id + '/update'
@@ -416,28 +373,15 @@ Vue.component('admin-ride-row', {
                 active: this.ride.active
             }
         }
-        run_ajax('PATCH', ride_data, path, this.update_ride_success, this.update_ride_failure);
+        run_ajax('PATCH', ride_data, path, this.update_ride_success, this.set_errors);
     },
     update_ride_success: function(res) {
-        Materialize.toast(res.message, 1000);
         admin_area_instance.get_rides();
         this.errors = []
     },
-    update_ride_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        this.errors = res.responseJSON.errors
-    },
     reset_queue: function() {
         path = '/rides/' + this.ride.id + '/reset_queue'
-        run_ajax('GET', {}, path, this.reset_queue_success, this.reset_queue_failure);
-    },
-    reset_queue_success: function(res) {
-        Materialize.toast(res.message, 1000);
-        admin_area_instance.get_rides();
-    },
-    reset_queue_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        admin_area_instance.get_rides();
+        run_ajax('GET', {}, path, admin_area_instance.get_rides, admin_area_instance.get_rides);
     },
     clear_queue: function() {
         path = '/rides/' + this.ride.id + '/clear_queue'
@@ -445,29 +389,17 @@ Vue.component('admin-ride-row', {
     },
     call_queue: function() {
         path = '/rides/' + this.ride.id + '/call/' + this.call_queue_num
-        run_ajax('GET', {}, path, this.call_queue_success, this.call_queue_failure);
+        run_ajax('GET', {}, path, this.call_queue_success, admin_area_instance.get_rides);
     },
     call_queue_success: function(res) {
         this.call_queue_num = 0
-        Materialize.toast(res.message, 1000);
-        admin_area_instance.get_rides();
-    },
-    call_queue_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
         admin_area_instance.get_rides();
     },
     delete_ride: function() {
         path = '/rides/' + this.ride.id
-        run_ajax('DELETE', {}, path, this.delete_ride_success, this.delete_ride_failure);
+        run_ajax('DELETE', {}, path, admin_area_instance.get_rides, admin_area_instance.get_rides);
     },
-    delete_ride_success: function(res) {
-        Materialize.toast(res.message, 1000);
-        admin_area_instance.get_rides();
-    },
-    delete_ride_failure: function(res) {
-        Materialize.toast(res.responseJSON.message, 1000);
-        admin_area_instance.get_rides();
-    }
+    set_errors: set_errors,
   }
 });
 
@@ -528,7 +460,6 @@ var admin_area_instance = new Vue({
         run_ajax('GET', {}, '/logout', this.logout_success);
       },
       logout_success: function(res) {
-        Materialize.toast(res.message, 1000);
         setTimeout(function(){window.location.reload();}, 1200);
       }
     }

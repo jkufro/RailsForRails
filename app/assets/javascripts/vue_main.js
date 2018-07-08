@@ -38,12 +38,10 @@ Vue.component('ride-row', {
         this.details_open = ! this.details_open;
     },
     create_queue_success: function(res) {
-      Materialize.toast(res.message, 1000);
       main_area_instance.get_park_passes();
       main_area_instance.get_rides();
     },
     create_queue_failure: function(res) {
-      Materialize.toast(res.responseJSON.message, 1000);
       main_area_instance.get_park_passes();
       main_area_instance.get_rides();
     },
@@ -97,15 +95,7 @@ Vue.component('current-queue-row', {
     },
     cancel_queue: function() {
       path = '/queues/' + this.park_pass.current_queue.id + '/cancel'
-      run_ajax('GET', {}, path, this.cancel_queue_success, this.cancel_queue_failure);
-    },
-    cancel_queue_success: function(res) {
-      Materialize.toast(res.message, 1000);
-      main_area_instance.get_park_passes();
-    },
-    cancel_queue_failure: function(res) {
-      Materialize.toast('Failed To Cancel Queue', 1000);
-      main_area_instance.get_park_passes();
+      run_ajax('GET', {}, path, main_area_instance.get_park_passes, main_area_instance.get_park_passes);
     },
     queue_context_text: function() {
       return this.park_pass.first_name + " - " + this.park_pass.current_queue.ride_name + " "
@@ -207,20 +197,13 @@ var main_area_instance = new Vue({
       get_users_failure(res) {
         this.users = [];
       },
-      post_success: function(res) {
-        this.errors = []
-        Materialize.toast(res.message, 1000);
-      },
-      post_failure: function(res) {
-        this.errors = res.responseJSON.errors
-      },
       logout: function() {
         run_ajax('GET', {}, '/logout', this.logout_success);
       },
       logout_success: function(res) {
-        Materialize.toast(res.message, 1000);
         setTimeout(function(){window.location.reload();}, 1200);
-      }
+      },
+      set_errors: set_errors
     }
 });
 

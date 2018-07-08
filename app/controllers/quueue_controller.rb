@@ -4,7 +4,7 @@ class QuueueController < ApplicationController
   def create
     ride_id = params['ride_id'].to_i
     visit_id = Visit.find_by_park_pass_id(params['park_pass_id']).id
-    @quueue = Quueue.new({ride_id: ride_id, visit_id: visit_id})
+    @quueue = Quueue.new({ride_id: ride_id, visit_id: visit_id, checked_in: false})
     if @quueue.save
       render json: { message: "Got In Line" }, status: :ok
     else
