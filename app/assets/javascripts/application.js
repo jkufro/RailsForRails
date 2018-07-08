@@ -16,6 +16,7 @@
 //= require materialize-sprockets
 //= require materialize-form
 //= require vue
+//= require qrcode.min
 
 
 $( document ).ready(function() {

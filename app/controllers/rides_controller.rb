@@ -14,7 +14,6 @@ class RidesController < ApplicationController
   def ready_security_codes
     # are_not_checked_in is dropping non checked in quueues
     ready_codes = @ride.quueues.today.are_not_checked_in.select("security_code")
-    byebug
     json_ready_codes = Hash.new()
     ready_codes.each do |rc|
       json_ready_codes[rc.security_code] = nil

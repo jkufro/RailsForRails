@@ -10,9 +10,12 @@
             </div>
             <div class='col s1 queue_more_vert_wrapper'>
                 <div class='row no-margin-bottom no-margin-top'>
-                    <div class='col s6'>
-                        <i class="material-icons center-align valign-wrapper queue_more_vert clickable" v-on:click="delete_open = true" v-if="!delete_open">more_vert</i>
-                        <i class="material-icons cancel_queue_button clickable" v-on:click="cancel_queue()" v-if="delete_open">delete</i>
+                    <div class='col s12'>
+                        <i class="material-icons center-align valign-wrapper queue_more_vert clickable" v-on:click="delete_open = true" v-if="delete_open == false">more_vert</i>
+                    </div>
+
+                    <div class='col s12'>
+                        <i class="material-icons cancel_queue_button clickable" v-on:click="cancel_queue()" v-if="delete_open == true">delete</i>
                     </div>
                 </div>
             </div>
