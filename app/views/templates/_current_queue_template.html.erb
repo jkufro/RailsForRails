@@ -28,7 +28,7 @@
         </div>
         <div class='queue_details row valign-wrapper center-align no-margin-bottom'>
             <div class='col s12'>
-                <p class='flow-text'>{{ park_pass.current_queue.security_code }}</p>
+                <div :id="park_pass.current_queue.security_code + '_qr_code'" class="queue_qr_code center-align center middle"></div>
             </div>
         </div>
     </div>

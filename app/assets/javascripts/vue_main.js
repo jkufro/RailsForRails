@@ -87,9 +87,24 @@ Vue.component('current-queue-row', {
     });
 
     $(this.queue_details_finder).hide();
+
+    this.make_qr_code();
   },
 
   methods: {
+    make_qr_code: function() {
+      if (this.park_pass.current_queue) {
+        qrcode = new QRCode(this.park_pass.current_queue.security_code + "_qr_code");
+        qrcode.makeCode(this.park_pass.current_queue.security_code);
+
+        finder = '#' + this.park_pass.current_queue.security_code + "_qr_code img";
+        setTimeout(this.center_image, 500, finder)
+      }
+    },
+    center_image: function(finder) {
+      console.log(finder);
+      $(finder).css("display","");
+    },
     toggle_delete_open: function() {
       this.delete_open = !this.delete_open
     },
